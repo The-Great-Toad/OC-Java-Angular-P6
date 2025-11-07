@@ -9,3 +9,6 @@ INSERT INTO topics (name, description) VALUES
 ('Cloud', 'Cloud platforms, serverless architecture, and cloud-native development'),
 ('Security', 'Application security, authentication, authorization, and best practices'),
 ('Testing', 'Unit testing, integration testing, TDD, and quality assurance');
+
+-- INSERT INTO users (name, email, password, created_at, updated_at) VALUES
+-- ('test', 'test@test.com', '{bcrypt}$2a$10$Zu5FT05HaUaSXYt907ranuI4F.nYVIfNfdmV1N//lUlDxKDfNuT9y', NOW(), NOW());
