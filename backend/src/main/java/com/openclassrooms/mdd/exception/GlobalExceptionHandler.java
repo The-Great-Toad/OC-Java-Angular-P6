@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.validation.FieldError;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -89,6 +89,32 @@ public class GlobalExceptionHandler {
         log.error("{}: {}", errorType, e.getMessage());
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         problemDetail.setTitle(errorType);
+        problemDetail.setProperty(TIMESTAMP, Instant.now());
+        return problemDetail;
+    }
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ProblemDetail handleUsernameNotFoundException(UsernameNotFoundException ex) {
+        log.error("Username not found: {}", ex.getMessage());
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
+            HttpStatus.NOT_FOUND,
+            ex.getMessage()
+        );
+        problemDetail.setTitle("User Not Found");
+        problemDetail.setProperty(TIMESTAMP, Instant.now());
+        return problemDetail;
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ProblemDetail handleResourceNotFoundException(ResourceNotFoundException ex) {
+        log.error("Resource not found: {}", ex.getMessage());
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
+            HttpStatus.NOT_FOUND,
+            ex.getMessage()
+        );
+        problemDetail.setTitle("Resource Not Found");
         problemDetail.setProperty(TIMESTAMP, Instant.now());
         return problemDetail;
     }

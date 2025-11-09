@@ -36,19 +36,6 @@ public class SecurityConfig {
     @Value("${app.cors.allowed-origins}")
     private String allowedOrigins;
 
-    // TODO: Delete after testing
-    // @Bean
-    // public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    //     http
-    //         .csrf(csrf -> csrf.disable())
-    //         .authorizeHttpRequests(auth -> auth
-    //             .anyRequest().permitAll()
-    //         );
-        
-    //     return http.build();
-    // }
-
-    // TODO: Activate after testing
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http

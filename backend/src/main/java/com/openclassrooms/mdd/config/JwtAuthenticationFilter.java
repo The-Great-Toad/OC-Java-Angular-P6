@@ -18,8 +18,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
+import com.openclassrooms.mdd.exception.TokenValidationException;
 import com.openclassrooms.mdd.service.JwtService;
 import com.openclassrooms.mdd.service.user.UserService;
+
+import ch.qos.logback.core.subst.Token;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -73,7 +76,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         } catch (Exception exception) {
             log.error("Exception occurred while processing JWT: {}", exception.getMessage(), exception);
-            handlerExceptionResolver.resolveException(request, response, null, exception);
+            TokenValidationException tokenValidationException = new TokenValidationException("Failed to validate JWT", exception);
+            handlerExceptionResolver.resolveException(request, response, null, tokenValidationException);
         }
     }
 

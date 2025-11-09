@@ -8,8 +8,6 @@ import com.openclassrooms.mdd.dto.request.UpdateProfileRequest;
 import com.openclassrooms.mdd.dto.response.LoginResponse;
 import com.openclassrooms.mdd.dto.response.UserProfileResponse;
 
-import java.util.UUID;
-
 public interface UserService extends UserDetailsService {
 
     /**
