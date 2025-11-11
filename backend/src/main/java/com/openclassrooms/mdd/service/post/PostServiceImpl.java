@@ -1,6 +1,5 @@
 package com.openclassrooms.mdd.service.post;
 
-import com.openclassrooms.mdd.dto.TopicDto;
 import com.openclassrooms.mdd.dto.request.CreatePostRequest;
 import com.openclassrooms.mdd.dto.response.PostResponse;
 import com.openclassrooms.mdd.exception.ResourceNotFoundException;

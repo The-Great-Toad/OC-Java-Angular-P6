@@ -9,7 +9,8 @@ public final class ValidationMessages {
     // Specific messages
     public static final String EMAIL_ALREADY_USED = "Email already used";
     public static final String TITLE_SIZE = "Title must be between 3 and 255 characters";
-    public static final String CONTENT_SIZE = "Content must be above 10 characters minimun";
+    public static final String POST_CONTENT_SIZE = "Content must be above 10 characters minimun";
+    public static final String COMMENT_CONTENT_SIZE = "Content must be between 1 and 2000 characters";
 
     // Authentication messages
     public static final String INVALID_CREDENTIALS = "Invalid credentials";

@@ -48,3 +48,59 @@ INSERT INTO posts (title, content, author_id, topic_id, created_at) VALUES
 
 ('JavaScript moderne : ES2024 features', 'ECMAScript 2024 introduit de nouvelles fonctionnalités intéressantes. Au programme : les decorators, les pattern matching, et les améliorations des arrays. Cet article explore ces nouveautés avec des exemples pratiques et des cas d''usage réels.', 
  UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440000', '-', '')), 2, DATE_SUB(NOW(), INTERVAL 30 MINUTE));
+
+-- Create test comments
+INSERT INTO comments (content, author_id, post_id, created_at) VALUES
+-- Comments on post 1 (Java 21)
+('Excellent article ! Les virtual threads vont vraiment changer la donne pour les applications concurrentes.', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440001', '-', '')), 1, DATE_SUB(NOW(), INTERVAL 4 DAY)),
+('Merci pour cet aperçu. J''ai hâte de tester les record patterns dans mes projets.', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 1, DATE_SUB(NOW(), INTERVAL 3 DAY)),
+
+-- Comments on post 2 (Spring Boot 3)
+('La migration javax vers jakarta a été un peu douloureuse sur notre projet, mais ça valait le coup !', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440000', '-', '')), 2, DATE_SUB(NOW(), INTERVAL 3 DAY)),
+('Très bon article. Pourriez-vous faire un tutoriel sur les observability features de Spring Boot 3 ?', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 2, DATE_SUB(NOW(), INTERVAL 2 DAY)),
+
+-- Comments on post 3 (Angular Signals)
+('Les Signals sont effectivement très prometteurs. RxJS reste utile, mais pour la plupart des cas, Signals simplifie vraiment le code.', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440001', '-', '')), 3, DATE_SUB(NOW(), INTERVAL 2 DAY)),
+
+-- Comments on post 4 (SQL optimization)
+('Super article ! La partie sur les index est particulièrement claire. Avez-vous des conseils pour PostgreSQL spécifiquement ?', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 4, DATE_SUB(NOW(), INTERVAL 1 DAY)),
+('EXPLAIN ANALYZE est mon meilleur ami maintenant. Merci pour ces rappels !', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440001', '-', '')), 4, DATE_SUB(NOW(), INTERVAL 12 HOUR)),
+
+-- Comments on post 5 (GitHub Actions)
+('J''utilise GitHub Actions depuis 6 mois, c''est vraiment puissant et bien intégré avec le reste de l''écosystème GitHub.', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440000', '-', '')), 5, DATE_SUB(NOW(), INTERVAL 18 HOUR)),
+
+-- Comments on post 6 (React Hooks)
+('Les hooks ont vraiment simplifié le développement React. Plus besoin de classes pour tout !', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440000', '-', '')), 6, DATE_SUB(NOW(), INTERVAL 10 HOUR)),
+('Attention aux dépendances dans useEffect, c''est souvent source de bugs pour les débutants.', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440001', '-', '')), 6, DATE_SUB(NOW(), INTERVAL 8 HOUR)),
+
+-- Comments on post 7 (OWASP)
+('La sécurité est trop souvent négligée. Merci pour ce rappel des bonnes pratiques !', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 7, DATE_SUB(NOW(), INTERVAL 5 HOUR)),
+('Spring Security est puissant mais complexe. Un article détaillé sur la configuration OAuth2 serait super !', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440001', '-', '')), 7, DATE_SUB(NOW(), INTERVAL 3 HOUR)),
+
+-- Comments on post 8 (AWS)
+('AWS peut sembler intimidant au début, mais ce guide aide vraiment à démarrer. Merci !', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440000', '-', '')), 8, DATE_SUB(NOW(), INTERVAL 2 HOUR)),
+
+-- Comments on post 9 (JUnit Mockito)
+('Les tests, c''est la vie ! JUnit 5 + Mockito, le combo parfait pour du code de qualité.', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440000', '-', '')), 9, DATE_SUB(NOW(), INTERVAL 45 MINUTE)),
+('@ParameterizedTest m''a fait gagner tellement de temps. Merci pour cet article !', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 9, DATE_SUB(NOW(), INTERVAL 30 MINUTE)),
+
+-- Comments on post 10 (JavaScript ES2024)
+('Les decorators vont enfin être standardisés ! J''attends ça depuis des années.', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440001', '-', '')), 10, DATE_SUB(NOW(), INTERVAL 15 MINUTE)),
+('Excellent résumé des nouveautés. JavaScript évolue vraiment vite !', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 10, DATE_SUB(NOW(), INTERVAL 5 MINUTE));

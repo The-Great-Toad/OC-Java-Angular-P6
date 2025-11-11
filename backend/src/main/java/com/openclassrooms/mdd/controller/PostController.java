@@ -1,7 +1,10 @@
 package com.openclassrooms.mdd.controller;
 
+import com.openclassrooms.mdd.dto.request.CreateCommentRequest;
 import com.openclassrooms.mdd.dto.request.CreatePostRequest;
+import com.openclassrooms.mdd.dto.response.CommentResponse;
 import com.openclassrooms.mdd.dto.response.PostResponse;
+import com.openclassrooms.mdd.service.comment.CommentService;
 import com.openclassrooms.mdd.service.post.PostService;
 
 import jakarta.validation.Valid;
@@ -19,7 +22,8 @@ import java.security.Principal;
 public class PostController {
 
     private final PostService postService;
-
+private final CommentService commentService;
+    
     @PostMapping
     public ResponseEntity<PostResponse> createPost(
             Principal principal,
@@ -32,5 +36,14 @@ public class PostController {
     public ResponseEntity<PostResponse> getPostById(@PathVariable Long id) {
         PostResponse response = postService.getPostById(id);
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/{postId}/comments")
+    public ResponseEntity<CommentResponse> createComment(
+            @PathVariable Long postId,
+            @Valid @RequestBody CreateCommentRequest request,
+            Principal principal) {
+        CommentResponse response = commentService.createComment(principal.getName(), postId, request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }

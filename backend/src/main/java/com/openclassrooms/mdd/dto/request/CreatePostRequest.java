@@ -15,6 +15,6 @@ public record CreatePostRequest(
     String title,
 
     @NotBlank(message = ValidationMessages.REQUIRED_FIELD)
-    @Size(min = 10, message = ValidationMessages.CONTENT_SIZE)
+    @Size(min = 10, message = ValidationMessages.POST_CONTENT_SIZE)
     String content
 ) {}

@@ -22,8 +22,6 @@ import com.openclassrooms.mdd.exception.TokenValidationException;
 import com.openclassrooms.mdd.service.JwtService;
 import com.openclassrooms.mdd.service.user.UserService;
 
-import ch.qos.logback.core.subst.Token;
-
 import java.io.IOException;
 import java.util.Objects;
 
