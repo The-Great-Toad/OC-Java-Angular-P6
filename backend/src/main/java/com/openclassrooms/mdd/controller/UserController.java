@@ -10,15 +10,13 @@ import lombok.RequiredArgsConstructor;
 import java.security.Principal;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-/**
- * REST controller for user profile management.
- * Handles profile retrieval and updates for authenticated users.
- *
- * @author MDD Team
- * @version 1.0
- */
+
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
@@ -26,27 +24,12 @@ public class UserController {
 
     private final UserService userService;
 
-    /**
-     * Retrieves the profile of the authenticated user.
-     *
-     * @param principal the authenticated user principal (contains UUID)
-     * @return the user's profile information with HTTP 200 OK
-     */
     @GetMapping("/me")
     public ResponseEntity<UserProfileResponse> getCurrentUserProfile(Principal principal) {
         UserProfileResponse profile = userService.getUserProfile(principal.getName());
         return ResponseEntity.ok(profile);
     }
 
-    /**
-     * Updates the profile of the authenticated user.
-     * Email can now be changed freely without invalidating the JWT token
-     * because the token uses the immutable UUID instead of the email.
-     *
-     * @param principal the authenticated user principal (contains UUID)
-     * @param request the update data (email, username, password - all optional)
-     * @return the updated user profile
-     */
     @PutMapping("/me")
     public ResponseEntity<UserProfileResponse> updateCurrentUserProfile(
         Principal principal,
