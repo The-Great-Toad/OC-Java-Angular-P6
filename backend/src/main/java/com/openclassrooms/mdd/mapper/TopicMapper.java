@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 
 import com.openclassrooms.mdd.dto.TopicDto;
 import com.openclassrooms.mdd.dto.response.SubscriptionResponse;
-import com.openclassrooms.mdd.model.Subscription;
 import com.openclassrooms.mdd.model.Topic;
 
 @Component
