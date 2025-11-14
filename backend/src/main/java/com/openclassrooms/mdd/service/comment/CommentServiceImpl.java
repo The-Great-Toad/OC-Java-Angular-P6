@@ -2,6 +2,8 @@ package com.openclassrooms.mdd.service.comment;
 
 import com.openclassrooms.mdd.dto.request.CreateCommentRequest;
 import com.openclassrooms.mdd.dto.response.CommentResponse;
+import com.openclassrooms.mdd.exception.ResourceNotFoundException;
+import com.openclassrooms.mdd.mapper.CommentMapper;
 import com.openclassrooms.mdd.model.Comment;
 import com.openclassrooms.mdd.model.Post;
 import com.openclassrooms.mdd.model.User;
@@ -25,6 +27,7 @@ public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
     private final PostRepository postRepository;
+    private final CommentMapper commentMapper;
 
     @Override
     @Transactional
@@ -35,7 +38,7 @@ public class CommentServiceImpl implements CommentService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
 
         Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new IllegalArgumentException("Post not found with id: " + postId));
+                .orElseThrow(() -> new ResourceNotFoundException("Post not found with id: " + postId));
 
         Comment comment = Comment.builder()
                 .content(request.content())
@@ -46,7 +49,7 @@ public class CommentServiceImpl implements CommentService {
         Comment savedComment = commentRepository.save(comment);
         log.info("Comment {} created successfully on post {}", savedComment.getId(), postId);
 
-        return mapToResponse(savedComment);
+        return commentMapper.mapToResponse(savedComment);
     }
 
     @Override
@@ -57,22 +60,7 @@ public class CommentServiceImpl implements CommentService {
         List<Comment> comments = commentRepository.findByPostIdOrderByCreatedAtAsc(postId);
 
         return comments.stream()
-                .map(this::mapToResponse)
+                .map(commentMapper::mapToResponse)
                 .collect(Collectors.toList());
-    }
-
-    /**
-     * Maps a Comment entity to a CommentResponse DTO.
-     *
-     * @param comment the comment entity
-     * @return the comment response DTO
-     */
-    private CommentResponse mapToResponse(Comment comment) {
-        return new CommentResponse(
-                comment.getId(),
-                comment.getContent(),
-                comment.getAuthor().getName(),
-                comment.getCreatedAt()
-        );
     }
 }

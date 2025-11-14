@@ -1,15 +1,18 @@
 package com.openclassrooms.mdd.service.user;
 
 import com.openclassrooms.mdd.constant.ValidationMessages;
+import com.openclassrooms.mdd.dto.TopicDto;
 import com.openclassrooms.mdd.dto.request.LoginRequest;
 import com.openclassrooms.mdd.dto.request.RegisterRequest;
 import com.openclassrooms.mdd.dto.request.UpdateProfileRequest;
 import com.openclassrooms.mdd.dto.response.LoginResponse;
 import com.openclassrooms.mdd.dto.response.UserProfileResponse;
+import com.openclassrooms.mdd.mapper.TopicMapper;
 import com.openclassrooms.mdd.mapper.UserMapper;
 import com.openclassrooms.mdd.model.User;
 import com.openclassrooms.mdd.repository.UserRepository;
 import com.openclassrooms.mdd.service.JwtService;
+import com.openclassrooms.mdd.service.subscription.SubscriptionService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,8 +24,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -30,21 +34,17 @@ import java.util.UUID;
 @Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
 
+    private final JwtService jwtService;
+    private final SubscriptionService subscriptionService;
+    private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final UserMapper userMapper;
-    private final PasswordEncoder passwordEncoder;
-    private final JwtService jwtService;
+    private final TopicMapper topicMapper;
 
-    /** {@inheritDoc} */
     @Override
     @Transactional
     public LoginResponse register(RegisterRequest request) {
         log.debug("Registering new user with email: {}", request.email());
-
-        if (userRepository.existsByEmail(request.email())) {
-            throw new IllegalArgumentException(ValidationMessages.EMAIL_ALREADY_EXISTS);
-        }
-
         User user = userMapper.mapToUser(request);
         User savedUser = userRepository.save(user);
         log.info("User registered successfully with ID: {}", savedUser.getId());
@@ -52,7 +52,6 @@ public class UserServiceImpl implements UserService {
         return jwtService.generateToken(savedUser.getId());
     }
 
-    /** {@inheritDoc} */
     @Override
     @Transactional
     public LoginResponse login(LoginRequest request) {
@@ -70,7 +69,6 @@ public class UserServiceImpl implements UserService {
         return jwtService.generateToken(user.getId());
     }
 
-    /** {@inheritDoc} */
     @Override
     public UserProfileResponse getUserProfile(String userEmail) {
         log.debug("Fetching profile for user email: {}", userEmail);
@@ -78,15 +76,18 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new UsernameNotFoundException(ValidationMessages.USER_NOT_FOUND));
 
-        // TODO: Fetch actual subscriptions when Subscription entity is implemented
+        List<TopicDto> subscriptions = subscriptionService.getUserSubscriptions(user.getEmail())
+                .stream()
+                .map(topicMapper::mapToDto)
+                .collect(Collectors.toList());
+
         return new UserProfileResponse(
                 user.getEmail(),
                 user.getName(),
-                Collections.emptyList()
+                subscriptions
         );
     }
 
-    /** {@inheritDoc} */
     @Override
     @Transactional
     public UserProfileResponse updateProfile(String userEmail, UpdateProfileRequest request) {
@@ -116,11 +117,15 @@ public class UserServiceImpl implements UserService {
         User updatedUser = userRepository.save(user);
         log.info("Profile updated successfully for user ID: {}", updatedUser.getId());
 
-        // TODO: Fetch actual subscriptions when Subscription entity is implemented
+        List<TopicDto> subscriptions = subscriptionService.getUserSubscriptions(updatedUser.getEmail())
+                .stream()
+                .map(topicMapper::mapToDto)
+                .collect(Collectors.toList());
+
         return new UserProfileResponse(
                 updatedUser.getEmail(),
                 updatedUser.getName(),
-                Collections.emptyList()
+                subscriptions
         );
     }
 
@@ -128,9 +133,6 @@ public class UserServiceImpl implements UserService {
     public UserDetails loadUserByUsername(String uuid) throws UsernameNotFoundException {
        return userRepository
                 .findById(UUID.fromString(uuid))
-                .orElseThrow(() -> {
-                    log.warn("User not found with ID: {}", uuid);
-                    return new UsernameNotFoundException(ValidationMessages.USER_NOT_FOUND);
-                });
+                .orElseThrow(() -> new UsernameNotFoundException(ValidationMessages.USER_NOT_FOUND));
     }
 }

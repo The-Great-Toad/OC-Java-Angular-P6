@@ -1,7 +1,7 @@
 package com.openclassrooms.mdd.service.topic;
 
 import com.openclassrooms.mdd.dto.TopicDto;
-import com.openclassrooms.mdd.model.Topic;
+import com.openclassrooms.mdd.mapper.TopicMapper;
 import com.openclassrooms.mdd.repository.TopicRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -19,23 +19,13 @@ import java.util.stream.Collectors;
 public class TopicServiceImpl implements TopicService {
 
     private final TopicRepository topicRepository;
+    private final TopicMapper topicMapper;
 
-    /** {@inheritDoc} */ 
     @Override
     public List<TopicDto> getAllTopics() {
         log.debug("Fetching all topics");
         return topicRepository.findAll().stream()
-                .map(this::mapToDto)
+                .map(topicMapper::mapToDto)
                 .collect(Collectors.toList());
-    }
-
-    /**
-     * Maps a Topic entity to a TopicDto.
-     *
-     * @param topic the topic entity to map
-     * @return the mapped TopicDto
-     */
-    private TopicDto mapToDto(Topic topic) {
-        return new TopicDto(topic.getId(), topic.getName(), topic.getDescription());
     }
 }

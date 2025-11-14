@@ -119,7 +119,21 @@ public class GlobalExceptionHandler {
         return problemDetail;
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ProblemDetail handleIllegalArgumentException(IllegalArgumentException ex) {
+        log.error("Illegal argument: {}", ex.getMessage());
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
+            HttpStatus.BAD_REQUEST,
+            ex.getMessage()
+        );
+        problemDetail.setTitle("Bad Request");
+        problemDetail.setProperty(TIMESTAMP, Instant.now());
+        return problemDetail;
+    }
+
     @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ProblemDetail handleGlobalException(Exception ex) {
         log.error("Internal server error occurred", ex);
         
