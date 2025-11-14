@@ -1,0 +1,133 @@
+-- Create test topics
+INSERT INTO topics (name, description) VALUES
+('Java', 'Discussions about Java programming language, JVM, and ecosystem'),
+('JavaScript', 'JavaScript, TypeScript, and modern web development'),
+('Spring Boot', 'Spring Boot framework, microservices, and enterprise Java'),
+('Angular', 'Angular framework, RxJS, and single-page applications'),
+('React', 'React library, hooks, and component-based architecture'),
+('DevOps', 'CI/CD, containerization, orchestration, and deployment strategies'),
+('Database', 'SQL, NoSQL, database design, and optimization techniques'),
+('Cloud', 'Cloud platforms, serverless architecture, and cloud-native development'),
+('Security', 'Application security, authentication, authorization, and best practices'),
+('Testing', 'Unit testing, integration testing, TDD, and quality assurance');
+
+-- Create test users (password: "password123")
+INSERT INTO users (id, name, email, password, created_at, updated_at) VALUES
+(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440000', '-', '')), 'Alice Dupont', 'alice@test.com', '$2a$10$Zu5FT05HaUaSXYt907ranuI4F.nYVIfNfdmV1N//lUlDxKDfNuT9y', NOW(), NOW()),
+(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440001', '-', '')), 'Bob Martin', 'bob@test.com', '$2a$10$Zu5FT05HaUaSXYt907ranuI4F.nYVIfNfdmV1N//lUlDxKDfNuT9y', NOW(), NOW()),
+(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 'Charlie Dubois', 'charlie@test.com', '$2a$10$Zu5FT05HaUaSXYt907ranuI4F.nYVIfNfdmV1N//lUlDxKDfNuT9y', NOW(), NOW());
+
+-- Create test posts
+INSERT INTO posts (title, content, author_id, topic_id, created_at) VALUES
+('Les nouveautés de Java 21', 'Java 21 apporte plusieurs améliorations majeures, notamment les record patterns et les pattern matching améliorés. Ces fonctionnalités permettent d''écrire du code plus concis et expressif. Les virtual threads sont également une révolution pour la concurrence en Java.', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440000', '-', '')), 1, DATE_SUB(NOW(), INTERVAL 5 DAY)),
+
+('Introduction à Spring Boot 3', 'Spring Boot 3 nécessite Java 17 minimum et apporte le support complet de Jakarta EE 10. La migration depuis Spring Boot 2 peut nécessiter quelques ajustements, notamment au niveau des imports javax vers jakarta. Cet article explore les principales étapes de migration.', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440001', '-', '')), 3, DATE_SUB(NOW(), INTERVAL 4 DAY)),
+
+('Angular Signals : Le futur de la réactivité', 'Angular 17 introduit les Signals comme nouveau système de réactivité. Cette approche permet une gestion plus fine des changements et améliore considérablement les performances. Voyons comment migrer progressivement de RxJS vers les Signals.', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 4, DATE_SUB(NOW(), INTERVAL 3 DAY)),
+
+('Optimisation des requêtes SQL', 'L''optimisation des requêtes SQL est cruciale pour les performances d''une application. Cet article présente les bonnes pratiques : utilisation des index, éviter les SELECT *, optimisation des JOIN, et analyse des plans d''exécution. Des exemples concrets sont fournis pour chaque cas.', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440000', '-', '')), 7, DATE_SUB(NOW(), INTERVAL 2 DAY)),
+
+('DevOps : CI/CD avec GitHub Actions', 'GitHub Actions facilite la mise en place de pipelines CI/CD. Cet article détaille comment créer un workflow pour tester, builder et déployer une application Spring Boot sur Azure. Les bonnes pratiques de sécurité pour la gestion des secrets sont également abordées.', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440001', '-', '')), 6, DATE_SUB(NOW(), INTERVAL 1 DAY)),
+
+('React Hooks : useState et useEffect', 'Les hooks React ont révolutionné la façon d''écrire des composants. useState permet de gérer l''état local tandis que useEffect gère les effets de bord. Cet article explore les patterns courants et les pièges à éviter lors de l''utilisation de ces hooks fondamentaux.', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 5, DATE_SUB(NOW(), INTERVAL 12 HOUR)),
+
+('Sécurité des applications web : OWASP Top 10', 'La sécurité des applications web est primordiale. L''OWASP Top 10 recense les vulnérabilités les plus critiques : injection SQL, XSS, CSRF, etc. Cet article détaille chaque vulnérabilité et présente les contre-mesures à mettre en place avec Spring Security.', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440000', '-', '')), 9, DATE_SUB(NOW(), INTERVAL 6 HOUR)),
+
+('Déploiement sur AWS : Guide complet', 'Amazon Web Services offre de nombreux services pour héberger vos applications. Ce guide couvre EC2, RDS, S3, et CloudFront. Nous verrons comment déployer une application full-stack avec une base de données MySQL et un frontend React.', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440001', '-', '')), 8, DATE_SUB(NOW(), INTERVAL 3 HOUR)),
+
+('Tests unitaires avec JUnit 5 et Mockito', 'Les tests unitaires garantissent la qualité du code. JUnit 5 apporte de nombreuses améliorations : @ParameterizedTest, @Nested, assertions améliorées. Mockito permet de mocker les dépendances facilement. Cet article présente les bonnes pratiques de testing en Java.', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 10, DATE_SUB(NOW(), INTERVAL 1 HOUR)),
+
+('JavaScript moderne : ES2024 features', 'ECMAScript 2024 introduit de nouvelles fonctionnalités intéressantes. Au programme : les decorators, les pattern matching, et les améliorations des arrays. Cet article explore ces nouveautés avec des exemples pratiques et des cas d''usage réels.', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440000', '-', '')), 2, DATE_SUB(NOW(), INTERVAL 30 MINUTE));
+
+-- Create test comments
+INSERT INTO comments (content, author_id, post_id, created_at) VALUES
+-- Comments on post 1 (Java 21)
+('Excellent article ! Les virtual threads vont vraiment changer la donne pour les applications concurrentes.', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440001', '-', '')), 1, DATE_SUB(NOW(), INTERVAL 4 DAY)),
+('Merci pour cet aperçu. J''ai hâte de tester les record patterns dans mes projets.', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 1, DATE_SUB(NOW(), INTERVAL 3 DAY)),
+
+-- Comments on post 2 (Spring Boot 3)
+('La migration javax vers jakarta a été un peu douloureuse sur notre projet, mais ça valait le coup !', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440000', '-', '')), 2, DATE_SUB(NOW(), INTERVAL 3 DAY)),
+('Très bon article. Pourriez-vous faire un tutoriel sur les observability features de Spring Boot 3 ?', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 2, DATE_SUB(NOW(), INTERVAL 2 DAY)),
+
+-- Comments on post 3 (Angular Signals)
+('Les Signals sont effectivement très prometteurs. RxJS reste utile, mais pour la plupart des cas, Signals simplifie vraiment le code.', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440001', '-', '')), 3, DATE_SUB(NOW(), INTERVAL 2 DAY)),
+
+-- Comments on post 4 (SQL optimization)
+('Super article ! La partie sur les index est particulièrement claire. Avez-vous des conseils pour PostgreSQL spécifiquement ?', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 4, DATE_SUB(NOW(), INTERVAL 1 DAY)),
+('EXPLAIN ANALYZE est mon meilleur ami maintenant. Merci pour ces rappels !', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440001', '-', '')), 4, DATE_SUB(NOW(), INTERVAL 12 HOUR)),
+
+-- Comments on post 5 (GitHub Actions)
+('J''utilise GitHub Actions depuis 6 mois, c''est vraiment puissant et bien intégré avec le reste de l''écosystème GitHub.', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440000', '-', '')), 5, DATE_SUB(NOW(), INTERVAL 18 HOUR)),
+
+-- Comments on post 6 (React Hooks)
+('Les hooks ont vraiment simplifié le développement React. Plus besoin de classes pour tout !', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440000', '-', '')), 6, DATE_SUB(NOW(), INTERVAL 10 HOUR)),
+('Attention aux dépendances dans useEffect, c''est souvent source de bugs pour les débutants.', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440001', '-', '')), 6, DATE_SUB(NOW(), INTERVAL 8 HOUR)),
+
+-- Comments on post 7 (OWASP)
+('La sécurité est trop souvent négligée. Merci pour ce rappel des bonnes pratiques !', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 7, DATE_SUB(NOW(), INTERVAL 5 HOUR)),
+('Spring Security est puissant mais complexe. Un article détaillé sur la configuration OAuth2 serait super !', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440001', '-', '')), 7, DATE_SUB(NOW(), INTERVAL 3 HOUR)),
+
+-- Comments on post 8 (AWS)
+('AWS peut sembler intimidant au début, mais ce guide aide vraiment à démarrer. Merci !', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440000', '-', '')), 8, DATE_SUB(NOW(), INTERVAL 2 HOUR)),
+
+-- Comments on post 9 (JUnit Mockito)
+('Les tests, c''est la vie ! JUnit 5 + Mockito, le combo parfait pour du code de qualité.', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440000', '-', '')), 9, DATE_SUB(NOW(), INTERVAL 45 MINUTE)),
+('@ParameterizedTest m''a fait gagner tellement de temps. Merci pour cet article !', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 9, DATE_SUB(NOW(), INTERVAL 30 MINUTE)),
+
+-- Comments on post 10 (JavaScript ES2024)
+('Les decorators vont enfin être standardisés ! J''attends ça depuis des années.', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440001', '-', '')), 10, DATE_SUB(NOW(), INTERVAL 15 MINUTE)),
+('Excellent résumé des nouveautés. JavaScript évolue vraiment vite !', 
+ UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 10, DATE_SUB(NOW(), INTERVAL 5 MINUTE));
+
+-- Create test subscriptions
+INSERT INTO subscriptions (user_id, topic_id, subscribed_at) VALUES
+-- Alice subscribed to Java, Spring Boot, Database, Security
+(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440000', '-', '')), 1, DATE_SUB(NOW(), INTERVAL 30 DAY)),
+(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440000', '-', '')), 3, DATE_SUB(NOW(), INTERVAL 25 DAY)),
+(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440000', '-', '')), 7, DATE_SUB(NOW(), INTERVAL 20 DAY)),
+(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440000', '-', '')), 9, DATE_SUB(NOW(), INTERVAL 15 DAY)),
+
+-- Bob subscribed to JavaScript, Angular, React, DevOps, Cloud
+(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440001', '-', '')), 2, DATE_SUB(NOW(), INTERVAL 28 DAY)),
+(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440001', '-', '')), 4, DATE_SUB(NOW(), INTERVAL 22 DAY)),
+(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440001', '-', '')), 5, DATE_SUB(NOW(), INTERVAL 18 DAY)),
+(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440001', '-', '')), 6, DATE_SUB(NOW(), INTERVAL 12 DAY)),
+(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440001', '-', '')), 8, DATE_SUB(NOW(), INTERVAL 8 DAY)),
+
+-- Charlie subscribed to all topics (full-stack developer)
+(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 1, DATE_SUB(NOW(), INTERVAL 35 DAY)),
+(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 2, DATE_SUB(NOW(), INTERVAL 35 DAY)),
+(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 3, DATE_SUB(NOW(), INTERVAL 35 DAY)),
+(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 4, DATE_SUB(NOW(), INTERVAL 30 DAY)),
+(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 5, DATE_SUB(NOW(), INTERVAL 30 DAY)),
+(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 6, DATE_SUB(NOW(), INTERVAL 25 DAY)),
+(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 7, DATE_SUB(NOW(), INTERVAL 20 DAY)),
+(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 8, DATE_SUB(NOW(), INTERVAL 15 DAY)),
+(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 9, DATE_SUB(NOW(), INTERVAL 10 DAY)),
+(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 10, DATE_SUB(NOW(), INTERVAL 5 DAY));
