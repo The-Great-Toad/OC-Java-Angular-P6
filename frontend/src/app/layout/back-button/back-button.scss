@@ -1,0 +1,16 @@
+.back-arrow-container {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+
+  .back-arrow {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateX(-4px);
+    }
+  }
+}

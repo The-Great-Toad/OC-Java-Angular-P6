@@ -1,0 +1,50 @@
+<div class="login-container">
+
+    <app-back-button></app-back-button>
+
+    <div class="login-card">
+        <h1>Connexion</h1>
+
+        @if (errorMessage()) {
+        <div class="error-message">
+            {{ errorMessage() }}
+        </div>
+        }
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <!-- Email or Username -->
+            <div class="form-group">
+                <label for="identifier">Email ou nom d'utilisateur</label>
+                <input type="text" id="identifier" formControlName="identifier"
+                       placeholder="Entrez votre email ou nom d'utilisateur"
+                       [class.invalid]="identifier?.invalid && identifier?.touched" />
+                @if (identifier?.invalid && identifier?.touched) {
+                <span class="error">Ce champ est requis</span>
+                }
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" formControlName="password"
+                       placeholder="Entrez votre mot de passe"
+                       [class.invalid]="password?.invalid && password?.touched" />
+                @if (password?.invalid && password?.touched) {
+                <span class="error">
+                    Le mot de passe doit contenir au moins 8 caractères
+                </span>
+                }
+            </div>
+
+            <div class="actions">
+                <button type="submit" class="btn" [disabled]="loginForm.invalid || isLoading()">
+                    @if (isLoading()) {
+                    Connexion en cours...
+                    } @else {
+                    Se connecter
+                    }
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

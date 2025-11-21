@@ -55,9 +55,9 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public LoginResponse login(LoginRequest request) {
-        log.debug("Login attempt with email: {}", request.email());
+        log.debug("Login attempt with email: {}", request.identifier());
 
-        User user = userRepository.findByEmail(request.email())
+        User user = userRepository.findByEmailOrName(request.identifier())
                 .orElseThrow(() -> new BadCredentialsException(ValidationMessages.INVALID_CREDENTIALS));
 
         if (!passwordEncoder.matches(request.password(), user.getPassword())) {

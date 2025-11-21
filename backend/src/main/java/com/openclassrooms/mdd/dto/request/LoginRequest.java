@@ -7,8 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 
 public record LoginRequest(
         @NotBlank(message = ValidationMessages.REQUIRED_FIELD)
-        @Email(message = ValidationMessages.INVALID_FORMAT)
-        String email,
+        String identifier,
 
         @NotBlank(message = ValidationMessages.REQUIRED_FIELD)
         String password
