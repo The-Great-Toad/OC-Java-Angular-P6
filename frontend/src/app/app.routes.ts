@@ -26,12 +26,12 @@ export const routes: Routes = [
       import('./features/auth/register/register.component').then((m) => m.RegisterComponent),
   },
 
-  // Authenticated routes with layout
+  // Authenticated routes
   {
     path: 'feed',
     title: "MDD - Fil d'actualité",
     canActivate: [authGuard],
-    loadComponent: () => import('./features/feed/feed').then((m) => m.Feed),
+    loadComponent: () => import('./features/feed/feed.component').then((m) => m.FeedComponent),
   },
   {
     path: '**',

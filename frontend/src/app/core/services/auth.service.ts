@@ -40,7 +40,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem(this.TOKEN_KEY);
     this.isAuthenticated.set(false);
-    this.router.navigate(['/']);
+    this.router.navigate(['']);
   }
 
   /** Get the JWT token */

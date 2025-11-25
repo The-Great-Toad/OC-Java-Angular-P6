@@ -1,0 +1,56 @@
+@use '../variables' as *;
+
+// ========================================
+// CARD COMPONENTS
+// ========================================
+
+.card {
+  background: $background-white;
+  border-radius: 8px;
+  padding: 2rem;
+  width: 100%;
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 1.5rem;
+  }
+
+  // Variante avec ombre (commentée car non utilisée actuellement)
+  // &--elevated {
+  //   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  // }
+
+  &--auth {
+    max-width: 450px;
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: $color-text;
+
+      @media (max-width: $breakpoint-mobile) {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  &--post {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: $color-bg;
+    border-radius: 8px;
+    padding: 1.5rem 1.5rem 0 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      background: #ececec;
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      padding: 1rem;
+    }
+  }
+}

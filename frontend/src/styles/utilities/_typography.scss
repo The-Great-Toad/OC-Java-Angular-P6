@@ -1,0 +1,54 @@
+@use '../variables' as *;
+
+// ========================================
+// TYPOGRAPHY UTILITIES
+// ========================================
+
+.text {
+  &--center {
+    text-align: center;
+  }
+
+  &--light {
+    color: $color-text-light;
+  }
+
+  &--primary {
+    color: $color-primary;
+  }
+
+  &--danger {
+    color: $color-danger;
+  }
+
+  &--sm {
+    font-size: $font-size-sm;
+  }
+
+  &--md {
+    font-size: $font-size-md;
+  }
+
+  &--lg {
+    font-size: $font-size-lg;
+  }
+
+  &--bold {
+    font-weight: $font-weight-bold;
+  }
+
+  &--truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &--clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

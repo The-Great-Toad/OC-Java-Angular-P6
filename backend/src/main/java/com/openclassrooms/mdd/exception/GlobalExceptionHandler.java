@@ -87,7 +87,7 @@ public class GlobalExceptionHandler {
     public ProblemDetail handleTokenException(Exception e) {
         String errorType = e instanceof TokenValidationException ? "Token Validation Error" : "Token Generation Error";
         log.error("{}: {}", errorType, e.getMessage());
-        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED, e.getMessage());
         problemDetail.setTitle(errorType);
         problemDetail.setProperty(TIMESTAMP, Instant.now());
         return problemDetail;

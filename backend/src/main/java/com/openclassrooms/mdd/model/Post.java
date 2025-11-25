@@ -2,6 +2,7 @@ package com.openclassrooms.mdd.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -18,14 +19,13 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
-import java.util.StringJoiner;
 
 @Entity
 @Table(name = "posts")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @EntityListeners(AuditingEntityListener.class)
 public class Post {
 
@@ -58,67 +58,4 @@ public class Post {
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public User getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(User author) {
-        this.author = author;
-    }
-
-    public Topic getTopic() {
-        return topic;
-    }
-
-    public void setTopic(Topic topic) {
-        this.topic = topic;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof Post post)) return false;
-        return Objects.equals(id, post.id) && 
-               Objects.equals(title, post.title) && 
-               Objects.equals(content, post.content) && 
-               Objects.equals(createdAt, post.createdAt);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, title, content, createdAt);
-    }
-
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", Post.class.getSimpleName() + "[", "]")
-                .add("id=" + id)
-                .add("title='" + title + "'")
-                .add("createdAt=" + createdAt)
-                .toString();
-    }
 }

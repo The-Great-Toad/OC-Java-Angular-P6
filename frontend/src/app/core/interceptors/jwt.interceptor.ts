@@ -24,10 +24,10 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
   /* Handle authentication errors */
   return next(req).pipe(
     catchError((error) => {
-      if (error.status === 401) {
+      if (error.status === 401 && router.url !== '/login') {
         /* Invalid or expired token */
         authService.logout();
-        router.navigate(['/login']);
+        router.navigate(['']);
       }
       return throwError(() => error);
     })

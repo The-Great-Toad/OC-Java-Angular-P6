@@ -1,0 +1,48 @@
+// ========================================
+// SPACING UTILITIES
+// ========================================
+
+.mt {
+  &--sm {
+    margin-top: 0.5rem;
+  }
+  &--md {
+    margin-top: 1rem;
+  }
+  &--lg {
+    margin-top: 2rem;
+  }
+  &--xl {
+    margin-top: 4rem;
+  }
+}
+
+.mb {
+  &--sm {
+    margin-bottom: 0.5rem;
+  }
+  &--md {
+    margin-bottom: 1rem;
+  }
+  &--lg {
+    margin-bottom: 2rem;
+  }
+  &--xl {
+    margin-bottom: 4rem;
+  }
+}
+
+.p {
+  &--sm {
+    padding: 0.5rem;
+  }
+  &--md {
+    padding: 1rem;
+  }
+  &--lg {
+    padding: 2rem;
+  }
+  &--xl {
+    padding: 4rem;
+  }
+}

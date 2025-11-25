@@ -2,6 +2,7 @@ package com.openclassrooms.mdd.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -18,14 +19,13 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
-import java.util.StringJoiner;
 
 @Entity
 @Table(name = "comments")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @EntityListeners(AuditingEntityListener.class)
 public class Comment {
 
@@ -55,57 +55,4 @@ public class Comment {
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public User getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(User author) {
-        this.author = author;
-    }
-
-    public Post getPost() {
-        return post;
-    }
-
-    public void setPost(Post post) {
-        this.post = post;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof Comment comment)) return false;
-        return Objects.equals(id, comment.id) && 
-               Objects.equals(content, comment.content) && 
-               Objects.equals(createdAt, comment.createdAt);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, content, createdAt);
-    }
-
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", Comment.class.getSimpleName() + "[", "]")
-                .add("id=" + id)
-                .add("createdAt=" + createdAt)
-                .toString();
-    }
 }

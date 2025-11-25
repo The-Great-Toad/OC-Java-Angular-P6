@@ -1,0 +1,21 @@
+// ========================================
+// UTILITIES - Point d'entrée principal
+// ========================================
+// Ce fichier est conservé pour la rétrocompatibilité.
+// Les utilitaires sont maintenant organisés dans utilities/
+//
+// Structure:
+// utilities/
+//   ├── _index.scss         → Point d'entrée centralisé
+//   ├── _layout.scss        → Containers, flex, grid
+//   ├── _components.scss    → Cards et composants réutilisables
+//   ├── _buttons.scss       → Système de boutons
+//   ├── _states.scss        → Loading, error, empty states
+//   ├── _forms.scss         → Form groups et inputs
+//   ├── _messages.scss      → Messages de feedback
+//   ├── _typography.scss    → Classes de texte
+//   ├── _spacing.scss       → Marges et paddings
+//   └── _interactions.scss  → Hover, animations
+// ========================================
+
+@forward 'utilities/index';

@@ -1,0 +1,49 @@
+@use '../variables' as *;
+
+// ========================================
+// FORM UTILITIES
+// ========================================
+
+.form-group {
+  margin-bottom: 1.5rem;
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-weight: 500;
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: $font-family;
+    transition: border-color 0.3s;
+
+    &:focus {
+      outline: none;
+      border-color: $color-primary;
+    }
+
+    &.invalid {
+      border-color: $color-danger;
+    }
+  }
+
+  textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  .error {
+    display: block;
+    color: $color-danger;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+  }
+}

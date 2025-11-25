@@ -13,9 +13,9 @@ INSERT INTO topics (name, description) VALUES
 
 -- Create test users (password: "password123")
 INSERT INTO users (id, name, email, password, created_at, updated_at) VALUES
-(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440000', '-', '')), 'Alice Dupont', 'alice@test.com', '$2a$10$Zu5FT05HaUaSXYt907ranuI4F.nYVIfNfdmV1N//lUlDxKDfNuT9y', NOW(), NOW()),
-(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440001', '-', '')), 'Bob Martin', 'bob@test.com', '$2a$10$Zu5FT05HaUaSXYt907ranuI4F.nYVIfNfdmV1N//lUlDxKDfNuT9y', NOW(), NOW()),
-(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 'Charlie Dubois', 'charlie@test.com', '$2a$10$Zu5FT05HaUaSXYt907ranuI4F.nYVIfNfdmV1N//lUlDxKDfNuT9y', NOW(), NOW());
+(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440000', '-', '')), 'Alice Dupont', 'alice@test.com', '{bcrypt}$2a$10$rKaj3vDaqCgI8cGKgVpw2uqs6j5Ml2nmwu3tYgV2wJ/aEyllzJqRq', NOW(), NOW()),
+(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440001', '-', '')), 'Bob Martin', 'bob@test.com', '{bcrypt}$2a$10$rKaj3vDaqCgI8cGKgVpw2uqs6j5Ml2nmwu3tYgV2wJ/aEyllzJqRq', NOW(), NOW()),
+(UNHEX(REPLACE('550e8400-e29b-41d4-a716-446655440002', '-', '')), 'Charlie Dubois', 'charlie@test.com', '{bcrypt}$2a$10$rKaj3vDaqCgI8cGKgVpw2uqs6j5Ml2nmwu3tYgV2wJ/aEyllzJqRq', NOW(), NOW());
 
 -- Create test posts
 INSERT INTO posts (title, content, author_id, topic_id, created_at) VALUES

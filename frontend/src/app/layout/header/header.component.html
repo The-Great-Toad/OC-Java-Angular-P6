@@ -9,7 +9,7 @@
         <div class="header__nav-container">
             <nav class="header__nav header__nav--desktop">
                 <!-- logout -->
-                <button class="header__nav-logout-btn" (click)="logout()">
+                <button class="header__nav-logout-btn btn btn-danger" (click)="logout()">
                     Se déconnecter
                 </button>
 
@@ -55,7 +55,7 @@
     @if (isMobileMenuOpen()) {
     <div class="header__mobile-menu">
         <nav class="header__mobile-nav">
-            <button class="header__logout-btn" (click)="logout()">
+            <button class="btn btn-danger" (click)="logout()">
                 Se déconnecter
             </button>
 

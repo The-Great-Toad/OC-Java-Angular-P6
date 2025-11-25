@@ -1,0 +1,38 @@
+@use '../variables' as *;
+@use 'sass:color';
+
+// ========================================
+// FEEDBACK MESSAGES
+// ========================================
+
+.message {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+
+  &--error {
+    background: #fee;
+    color: $color-danger !important;
+    border: 1px solid #fcc;
+  }
+
+  &--success {
+    background: #efe;
+    color: #2a2;
+    border: 1px solid #cfc;
+  }
+
+  &--info {
+    background: $color-primary-light;
+    color: $color-primary-dark;
+    border: 1px solid color.adjust($color-primary, $lightness: 20%);
+  }
+}
+
+// Alias pour compatibilité
+.error-message {
+  @extend .message;
+  @extend .message--error;
+}

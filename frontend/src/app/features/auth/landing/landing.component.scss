@@ -12,7 +12,6 @@
   margin-bottom: 5rem;
   width: 600px;
   height: 300px;
-  opacity: 1;
 
   .logo {
     width: 100%;
@@ -26,20 +25,9 @@
   gap: 1rem;
   justify-content: space-between;
   flex-wrap: wrap;
-
-  .btn {
-    transition: all 0.3s;
-
-    &.btn:hover {
-      background-color: $color-primary;
-      color: white;
-      transform: translateY(-8px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
-  }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $breakpoint-mobile) {
   .logo-section {
     width: 80%;
     height: auto;
@@ -51,9 +39,5 @@
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
-
-    .btn {
-      width: 100px;
-    }
   }
 }

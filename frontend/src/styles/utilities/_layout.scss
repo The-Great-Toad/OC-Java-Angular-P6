@@ -1,0 +1,103 @@
+@use '../variables' as *;
+
+// ========================================
+// LAYOUT UTILITIES
+// ========================================
+
+// Conteneur centré avec largeur maximale
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 0 0.5rem;
+  }
+
+  &--narrow {
+    max-width: 600px;
+  }
+
+  &--auth {
+    margin-top: 2rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  &--feed {
+    margin: 0 auto;
+    padding: 2rem 1rem;
+
+    @media (max-width: $breakpoint-mobile) {
+      padding: 1rem 0.5rem;
+    }
+  }
+}
+
+// Flexbox utilities
+.flex {
+  display: flex;
+
+  &--center {
+    justify-content: center;
+    align-items: center;
+  }
+
+  &--between {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &--column {
+    flex-direction: column;
+  }
+
+  &--wrap {
+    flex-wrap: wrap;
+  }
+
+  &--gap-sm {
+    gap: 0.5rem;
+  }
+
+  &--gap-md {
+    gap: 1rem;
+  }
+
+  &--gap-lg {
+    gap: 1.5rem;
+  }
+
+  &--gap-xl {
+    gap: 2rem;
+  }
+}
+
+// Grid layouts
+.grid {
+  display: grid;
+  gap: 1.5rem;
+
+  &--2-cols {
+    grid-template-columns: repeat(2, 1fr);
+
+    @media (max-width: $breakpoint-mobile) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &--3-cols {
+    grid-template-columns: repeat(3, 1fr);
+
+    @media (max-width: $breakpoint-mobile) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &--auto-fit {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}

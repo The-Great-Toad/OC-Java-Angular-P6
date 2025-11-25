@@ -1,0 +1,68 @@
+<div class="container--feed">
+    <div class="feed-header">
+        <!-- Create Post Button -->
+        <button class="btn btn-primary" (click)="createPost()">
+            Créer un article
+        </button>
+
+        <!-- Sort Order Toggle -->
+        <button class="btn btn-ghost" (click)="toggleSortOrder()" [disabled]="isPostsEmpty()"
+                [attr.aria-label]="sortOrder() === 'desc' ? 'Trier du plus ancien au plus récent' : 'Trier du plus récent au plus ancien'">
+            Trier par
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+                @if (sortOrder() === 'desc') {
+                <path d="M10 3V17M10 17L6 13M10 17L14 13" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                } @else {
+                <path d="M10 17V3M10 3L6 7M10 3L14 7" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                }
+            </svg>
+        </button>
+    </div>
+
+    <!-- Loading State -->
+    @if (isLoading()) {
+    <div class="loading-container">
+        <div class="spinner"></div>
+        <p>Chargement des articles...</p>
+    </div>
+    }
+    <!-- Error State -->
+    @else if (errorMessage()) {
+    <div class="error-container">
+        <p class="message message--error">{{ errorMessage() }}</p>
+        <button class="btn btn-tertiary" (click)="getUserFeed()">Réessayer</button>
+    </div>
+    }
+    <!-- Empty State -->
+    @else if (isPostsEmpty()) {
+    <div class="empty-container">
+        <p>Aucun article disponible.</p>
+        <p class="empty-hint">Abonnez-vous à des thèmes pour voir les articles correspondants.</p>
+        <button class="btn btn-primary" (click)="router.navigate(['/topics'])">
+            Voir les thèmes
+        </button>
+    </div>
+    }
+    <!-- Posts List -->
+    @else {
+    <div class="grid grid--2-cols">
+        @for (post of posts(); track post.id) {
+        <!-- Post -->
+        <article class="card--post" (click)="viewPost(post.id)">
+            <!-- Title -->
+            <h4 class="post-title">{{ post.title }}</h4>
+            <!-- Author and Date -->
+            <div class="post-meta">
+                <div class="post-date">{{ formatDate(post.createdAt) }}</div>
+                <div class="post-author">{{ post.author }}</div>
+            </div>
+            <!-- content -->
+            <p class="post-content">{{ post.content }}</p>
+        </article>
+        }
+    </div>
+    }
+</div>

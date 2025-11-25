@@ -1,10 +1,12 @@
 package com.openclassrooms.mdd.service.feed;
 
+import com.openclassrooms.mdd.dto.response.CommentResponse;
 import com.openclassrooms.mdd.dto.response.PostResponse;
 import com.openclassrooms.mdd.dto.response.SubscriptionResponse;
 import com.openclassrooms.mdd.mapper.PostMapper;
 import com.openclassrooms.mdd.model.Post;
 import com.openclassrooms.mdd.repository.PostRepository;
+import com.openclassrooms.mdd.service.comment.CommentService;
 import com.openclassrooms.mdd.service.subscription.SubscriptionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,9 +22,11 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class FeedServiceImpl implements FeedService {
 
+    public static final String ASC = "asc";
     private final SubscriptionService subscriptionService;
     private final PostRepository postRepository;
     private final PostMapper postMapper;
+    private final CommentService commentService;
 
     @Override
     @Transactional(readOnly = true)
@@ -38,10 +42,10 @@ public class FeedServiceImpl implements FeedService {
 
         List<Long> topicIds = subscriptions.stream()
                 .map(SubscriptionResponse::topicId)
-                .collect(Collectors.toList());
+                .toList();
 
         List<Post> posts;
-        if ("asc".equalsIgnoreCase(sortOrder)) {
+        if (ASC.equalsIgnoreCase(sortOrder)) {
             posts = postRepository.findByTopicIdInOrderByCreatedAtAsc(topicIds);
             log.debug("Fetched {} posts sorted by date ascending", posts.size());
         } else {
@@ -50,7 +54,7 @@ public class FeedServiceImpl implements FeedService {
         }
 
         return posts.stream()
-                .map(postMapper::mapToResponse)
-                .collect(Collectors.toList());
+                .map(post -> postMapper.mapToResponse(post, null))
+                .toList();
     }
 }

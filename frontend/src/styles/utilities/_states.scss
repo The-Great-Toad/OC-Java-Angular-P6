@@ -1,0 +1,64 @@
+@use '../variables' as *;
+
+// ========================================
+// STATE CONTAINERS (loading, error, empty)
+// ========================================
+
+.state-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+
+  p {
+    color: $color-text;
+    font-size: $font-size-md;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.loading-container {
+  @extend .state-container;
+
+  .spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid $color-bg;
+    border-top-color: $color-primary;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: $color-text-light;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-container {
+  @extend .state-container;
+
+  .error-message {
+    color: $color-danger;
+    font-size: $font-size-md;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.empty-container {
+  @extend .state-container;
+
+  .empty-hint {
+    color: $color-text-light;
+    font-size: $font-size-sm;
+    margin-bottom: 1.5rem;
+  }
+}

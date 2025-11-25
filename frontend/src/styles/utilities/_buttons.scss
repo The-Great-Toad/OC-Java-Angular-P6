@@ -1,0 +1,94 @@
+@use '../variables' as *;
+@use 'sass:color';
+
+// ========================================
+// BUTTON SYSTEM (unifié)
+// ========================================
+
+.btn {
+  width: 150px;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-family: $font-family;
+  font-size: $font-size-md;
+  font-weight: $font-weight-bold;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  text-align: center;
+  text-decoration: none;
+
+  &:disabled {
+    background: #ccc;
+    color: #666;
+    border: 1px solid #aaa;
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.btn-primary {
+  background: $color-primary;
+  color: white;
+  border: 1px solid $color-primary;
+
+  &:hover:not(:disabled) {
+    background: $color-primary-dark;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.btn-secondary {
+    border: 1px solid black;
+    padding: 0;
+
+    &:hover:not(:disabled) {
+    color: $color-primary-dark;
+    border: 1px solid $color-primary-dark;
+    transform: translateY(-8px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.btn-tertiary {
+  background: $background-light;
+  color: $color-text;
+  border: $border-default;
+
+  &:hover:not(:disabled) {
+    background: $color-bg;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.btn-ghost {
+  background: transparent;
+  color: $color-text;
+  border: none;
+  padding: 0.5rem;
+
+  &:hover:not(:disabled) {
+    color: $color-primary;
+  }
+}
+
+.btn-danger {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: $color-danger;
+
+  &:hover:not(:disabled) {
+    color: color.adjust($color-danger, $lightness: 20%);
+  }
+}

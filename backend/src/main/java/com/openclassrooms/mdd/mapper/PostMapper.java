@@ -7,15 +7,13 @@ import com.openclassrooms.mdd.dto.TopicDto;
 import com.openclassrooms.mdd.dto.response.CommentResponse;
 import com.openclassrooms.mdd.dto.response.PostResponse;
 import com.openclassrooms.mdd.model.Post;
-import com.openclassrooms.mdd.service.comment.CommentService;
 
 import java.util.List;
+import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
 public class PostMapper {
-
-    private final CommentService commentService;
 
     /**
      * Maps a Post entity to a PostResponse DTO.
@@ -24,23 +22,25 @@ public class PostMapper {
      * @param post the post entity to map
      * @return the mapped PostResponse with comments
      */
-    public PostResponse mapToResponse(Post post) {
+    public PostResponse mapToResponse(Post post, List<CommentResponse> comments) {
         TopicDto topicDto = new TopicDto(
                 post.getTopic().getId(),
                 post.getTopic().getName(),
-                post.getTopic().getDescription()
-        );
+                post.getTopic().getDescription());
 
-        List<CommentResponse> comments = commentService.getCommentsByPost(post.getId());
+        PostResponse postResponse = PostResponse.builder()
+                .id(post.getId())
+                .title(post.getTitle())
+                .content(post.getContent())
+                .author(post.getAuthor().getName())
+                .topic(topicDto)
+                .createdAt(post.getCreatedAt())
+                .build();
 
-        return new PostResponse(
-                post.getId(),
-                post.getTitle(),
-                post.getContent(),
-                post.getAuthor().getName(),
-                topicDto,
-                post.getCreatedAt(),
-                comments
-        );
+        if (Objects.nonNull(comments)) {
+            postResponse.setComments(comments);
+        }
+
+        return postResponse;
     }
 }

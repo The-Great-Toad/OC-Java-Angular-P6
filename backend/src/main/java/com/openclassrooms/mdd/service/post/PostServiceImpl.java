@@ -1,6 +1,7 @@
 package com.openclassrooms.mdd.service.post;
 
 import com.openclassrooms.mdd.dto.request.CreatePostRequest;
+import com.openclassrooms.mdd.dto.response.CommentResponse;
 import com.openclassrooms.mdd.dto.response.PostResponse;
 import com.openclassrooms.mdd.exception.ResourceNotFoundException;
 import com.openclassrooms.mdd.mapper.PostMapper;
@@ -10,14 +11,16 @@ import com.openclassrooms.mdd.model.User;
 import com.openclassrooms.mdd.repository.PostRepository;
 import com.openclassrooms.mdd.repository.TopicRepository;
 import com.openclassrooms.mdd.repository.UserRepository;
+import com.openclassrooms.mdd.service.comment.CommentService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 
 @Slf4j
 @Service
@@ -29,6 +32,7 @@ public class PostServiceImpl implements PostService {
     private final UserRepository userRepository;
     private final TopicRepository topicRepository;
     private final PostMapper postMapper;
+    private final CommentService commentService;
 
     /** {@inheritDoc} */
     @Override
@@ -52,7 +56,9 @@ public class PostServiceImpl implements PostService {
         Post savedPost = postRepository.save(post);
         log.info("Post created successfully with ID: {}", savedPost.getId());
 
-        return postMapper.mapToResponse(savedPost);
+        List<CommentResponse> comments = commentService.getCommentsByPost(savedPost.getId());
+
+        return postMapper.mapToResponse(savedPost, comments);
     }
 
     /** {@inheritDoc} */
@@ -63,6 +69,8 @@ public class PostServiceImpl implements PostService {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Post with ID " + id + " not found"));
 
-        return postMapper.mapToResponse(post);
+        List<CommentResponse> comments = commentService.getCommentsByPost(post.getId());
+
+        return postMapper.mapToResponse(post, comments);
     }
 }

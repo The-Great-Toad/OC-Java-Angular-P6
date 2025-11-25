@@ -1,12 +1,12 @@
-<div class="register-container">
+<div class="container--auth">
 
     <app-back-button></app-back-button>
 
-    <div class="register-card">
+    <div class="card card--auth">
         <h1>Inscription</h1>
 
         @if (errorMessage()) {
-        <div class="error-message">
+        <div class="message message--error">
             {{ errorMessage() }}
         </div>
         }
@@ -55,8 +55,9 @@
                 }
             </div>
 
-            <div class="actions">
-                <button type="submit" class="btn" [disabled]="registerForm.invalid || isLoading()">
+            <div class="flex flex--center">
+                <button type="submit" class="btn btn-primary"
+                        [disabled]="registerForm.invalid || isLoading()">
                     @if (isLoading()) {
                     Inscription en cours...
                     } @else {

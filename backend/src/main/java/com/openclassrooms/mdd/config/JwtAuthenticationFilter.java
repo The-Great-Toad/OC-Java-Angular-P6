@@ -67,6 +67,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     setSecurityContextAuthentication(request, userUuid);
                 } else {
                     log.warn("Invalid JWT for user: {} - Token expired: {}", userUuid, jwtService.isTokenExpired(jwt));
+                    handlerExceptionResolver.resolveException(request, response, null, new TokenValidationException("Invalid JWT token"));
                 }
             }
 
