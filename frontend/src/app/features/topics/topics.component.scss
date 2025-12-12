@@ -1,0 +1,76 @@
+@use '../../../styles/variables' as *;
+
+// ========================================
+// STYLES SPÉCIFIQUES À LA PAGE TOPICS
+// ========================================
+// Les utilitaires génériques (container, buttons, states)
+// sont définis dans styles/utilities/
+
+// Header spécifique topics
+.topics-header {
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 1.75rem;
+    font-weight: $font-weight-bold;
+    color: $color-text;
+    margin: 0;
+
+    @media (max-width: $breakpoint-mobile) {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+// Card topic (réutilise la base .card mais avec style spécifique)
+.topic-card {
+  background: $color-bg;
+  border-radius: 8px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #ececec;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 1rem;
+  }
+}
+
+.topic-card__content {
+  flex: 1;
+}
+
+.topic-card__name {
+  font-size: 1.25rem;
+  font-weight: $font-weight-bold;
+  color: $color-text;
+  margin: 0 0 0.75rem 0;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 1.125rem;
+  }
+}
+
+.topic-card__description {
+  font-size: $font-size-md;
+  line-height: $line-height-md;
+  color: $color-text-light;
+  margin: 0;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: $font-size-sm;
+  }
+}
+
+.topic-card__actions {
+  display: flex;
+  justify-content: center;
+}

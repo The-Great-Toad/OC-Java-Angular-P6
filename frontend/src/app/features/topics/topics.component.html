@@ -1,0 +1,47 @@
+<div class="container--feed">
+
+    <!-- Loading State -->
+    @if (isLoading()) {
+    <div class="loading-container">
+        <div class="spinner"></div>
+        <p>Chargement des thèmes...</p>
+    </div>
+    }
+    <!-- Error State -->
+    @else if (errorMessage()) {
+    <div class="error-container">
+        <p class="error-message">{{ errorMessage() }}</p>
+        <button class="btn btn-primary" (click)="retryLoad()">Réessayer</button>
+    </div>
+    }
+    <!-- Topics List -->
+    @else {
+    <div class="grid grid--2-cols">
+        @for (topic of topics(); track topic.id) {
+        <article class="topic-card">
+            <div class="topic-card__content">
+                <h2 class="topic-card__name">{{ topic.name }}</h2>
+                <p class="topic-card__description">{{ topic.description }}</p>
+            </div>
+            <div class="topic-card__actions">
+                @if (isSubscribed(topic.id)) {
+                <button class="btn" disabled>
+                    Déjà abonné
+                </button>
+                } @else {
+                <button class="btn btn-primary" (click)="subscribe(topic.id)">
+                    S'abonner
+                </button>
+                }
+            </div>
+        </article>
+        }
+    </div>
+    <!-- Empty State -->
+    @if (topics().length === 0) {
+    <div class="empty-container">
+        <p>Aucun thème disponible pour le moment.</p>
+    </div>
+    }
+    }
+</div>

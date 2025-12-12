@@ -34,6 +34,13 @@ export const routes: Routes = [
     loadComponent: () => import('./features/feed/feed.component').then((m) => m.FeedComponent),
   },
   {
+    path: 'topics',
+    title: 'MDD - Thèmes',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/topics/topics.component').then((m) => m.TopicsComponent),
+  },
+  {
     path: '**',
     redirectTo: '',
   },
