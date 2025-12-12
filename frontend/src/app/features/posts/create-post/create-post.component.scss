@@ -1,0 +1,68 @@
+@use '../../../../styles/variables' as *;
+@use 'sass:color';
+
+.create-post-card {
+  max-width: 700px;
+  margin-top: 0rem;
+  padding-top: 0;
+}
+
+select:invalid {
+  color: grey;
+}
+
+// Form textarea specific
+.form-textarea {
+  resize: vertical;
+  min-height: 150px;
+  font-family: $font-family;
+}
+
+.form-error {
+  color: $color-danger;
+  font-size: $font-size-sm;
+  margin-top: 0.5rem;
+}
+
+// Form actions
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+
+  @media (max-width: $breakpoint-mobile) {
+    flex-direction: column-reverse;
+
+    .btn {
+      width: 100%;
+    }
+  }
+}
+
+.form-input--error {
+  border-color: $color-danger;
+  background: color.scale($color-danger, $lightness: 93.603305785%);
+}
+
+// Required indicator
+.required {
+  color: $color-danger;
+}
+
+// Form hint
+.form-hint {
+  font-size: $font-size-sm;
+  color: $color-text-light;
+  margin: 0.5rem 0 0 0;
+}
+
+// Inline error (general)
+.error-message-inline {
+  background: lighten($color-danger, 45%);
+  color: $color-danger;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: $font-size-sm;
+}

@@ -1,0 +1,80 @@
+<div class="container--auth">
+    <app-back-button></app-back-button>
+
+    <div class="card card--auth create-post-card">
+        <h1>Créer un nouvel article</h1>
+
+        <!-- Error Message -->
+        @if (errorMessage()) {
+        <div class="error-message-inline">
+            {{ errorMessage() }}
+        </div>
+        }
+
+        <!-- Form -->
+        <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+            <!-- Topic Selection -->
+            <div class="form-group">
+                @if (isLoadingTopics()) {
+                <p class="form-hint">Chargement des thèmes...</p>
+                } @else {
+                <select id="topic" formControlName="topicId" class="form-input"
+                        [class.form-input--error]="topicIdControl?.invalid && topicIdControl?.touched"
+                        required>
+                    <option value="" disabled selected hidden>Sélectionner un thème
+                    </option>
+                    @for (topic of topics(); track topic.id) {
+                    <option [value]="topic.id">{{ topic.name }}</option>
+                    }
+                </select>
+                @if (topicIdControl?.invalid && topicIdControl?.touched) {
+                @if (topicIdControl?.errors?.['required']) {
+                <p class="form-error">Le thème est requis</p>
+                }
+                }
+                }
+            </div>
+
+            <!-- Title -->
+            <div class="form-group">
+                <input type="text" id="title" formControlName="title" class="form-input"
+                       placeholder="Titre de l'article"
+                       [class.form-input--error]="titleControl?.invalid && titleControl?.touched" />
+                @if (titleControl?.invalid && titleControl?.touched) {
+                @if (titleControl?.errors?.['required']) {
+                <p class="form-error">Le titre est requis</p>
+                }
+                @if (titleControl?.errors?.['minlength']) {
+                <p class="form-error">Le titre doit contenir au moins 3 caractères</p>
+                }
+                @if (titleControl?.errors?.['maxlength']) {
+                <p class="form-error">Le titre ne peut pas dépasser 255 caractères</p>
+                }
+                }
+            </div>
+
+            <!-- Content -->
+            <div class="form-group">
+                <textarea id="content" formControlName="content" class="form-input form-textarea"
+                          rows="8" placeholder="Contenu de l'article..."
+                          [class.form-input--error]="contentControl?.invalid && contentControl?.touched"></textarea>
+                @if (contentControl?.invalid && contentControl?.touched) {
+                @if (contentControl?.errors?.['required']) {
+                <p class="form-error">Le contenu est requis</p>
+                }
+                @if (contentControl?.errors?.['minlength']) {
+                <p class="form-error">Le contenu doit contenir au moins 10 caractères</p>
+                }
+                }
+            </div>
+
+            <!-- Actions -->
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary"
+                        [disabled]="postForm.invalid || isSubmitting()">
+                    {{ isSubmitting() ? 'Création...' : 'Créer' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

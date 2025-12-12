@@ -1,6 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { AuthService } from './core/services/auth.service';
+import { Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './layout/header/header.component';
 
 @Component({
@@ -10,7 +9,10 @@ import { HeaderComponent } from './layout/header/header.component';
   styleUrl: './app.scss',
 })
 export class App {
-  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
   protected readonly title = signal('mdd');
-  protected readonly isAuthenticated = this.authService.isAuthenticated;
+
+  protected isLandingPage() {
+    return this.router.url === '/';
+  }
 }

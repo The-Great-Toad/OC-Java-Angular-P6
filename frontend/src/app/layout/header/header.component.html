@@ -5,6 +5,7 @@
             <img src="/mdd-logo.png" alt="MDD Logo" class="header__logo-img">
         </div>
 
+        @if (isAuthenticated()) {
         <!-- Desktop Navigation -->
         <div class="header__nav-container">
             <nav class="header__nav header__nav--desktop">
@@ -49,10 +50,11 @@
                 <span class="header__hamburger-line"></span>
             </button>
         </div>
+        }
     </div>
 
     <!-- Mobile Menu Overlay -->
-    @if (isMobileMenuOpen()) {
+    @if (isMobileMenuOpen() && isAuthenticated()) {
     <div class="header__mobile-menu">
         <nav class="header__mobile-nav">
             <button class="btn btn-danger" (click)="logout()">
