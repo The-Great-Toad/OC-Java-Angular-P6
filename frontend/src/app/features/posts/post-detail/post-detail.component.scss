@@ -1,0 +1,140 @@
+@use '../../../../styles/variables' as *;
+@use 'sass:color';
+
+// Back button position
+.article-details-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.post-detail-title {
+  margin-bottom: 0.5rem;
+}
+
+// Post Article
+.post-detail {
+  padding: 0 3rem;
+  margin-bottom: 2rem;
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 0.5rem;
+  }
+}
+
+.post-detail__header {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.post-detail__content {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+// Separator
+.separator {
+  margin: 1rem 3rem;
+
+  @media (max-width: $breakpoint-mobile) {
+    margin: 0.5rem;
+  }
+}
+
+// Comments Section
+.comments-section {
+  background: $background-white;
+  border-radius: 8px;
+  padding: 0 3rem;
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 0.5rem;
+  }
+}
+
+.comments-section__title {
+  margin-bottom: 1rem;
+}
+
+// Comments List
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.comment-wrapper {
+  display: flex;
+  margin-left: 2rem;
+  gap: 1rem;
+
+  @media (max-width: $breakpoint-mobile) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    margin: 0;
+  }
+}
+
+.comment-author {
+  width: 10rem;
+}
+
+.comment-content {
+  background: $color-bg;
+  border-radius: 8px;
+  padding: 1rem;
+  font-size: $font-size-md;
+  line-height: $line-height-md;
+  color: $color-text;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+// Comment Form
+.comment-form {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: auto 100px;
+  margin-top: 1rem;
+  margin-left: 2rem;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    grid-template-columns: 1fr auto;
+    margin: 1rem 0 0 0;
+  }
+}
+
+.form-input--error {
+  border-color: $color-danger;
+  background: color.scale($color-danger, $lightness: 93.603305785%);
+}
+
+// Icon in button
+.btn-ghost:not(:disabled) {
+  cursor: pointer;
+}
+.btn-ghost:is(:disabled) {
+  cursor: not-allowed;
+}
+
+// Empty state
+.comments-empty {
+  text-align: center;
+  padding: 2rem;
+  margin: 0;
+}
+
+// Inline error (for comment submission)
+.error-container {
+  margin-top: 1rem;
+  padding: 0 0 0 2rem;
+}

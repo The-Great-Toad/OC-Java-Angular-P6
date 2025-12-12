@@ -27,22 +27,22 @@ $background-light: #f9f9f9;
 $border-default: 1px solid $color-border;
 
 // HEIGHTS
-$header-height-desktop: 70px;
-$header-height-mobile: 85px;
+$header-height-desktop: 4.375rem; // 70px
+$header-height-mobile: 5.3125rem; // 85px
 
 // BREAKPOINTS
 $breakpoint-mobile: 768px;
 
 // LOGO SIZES
-$logo-width-desktop: 150px;
-$logo-height-desktop: 80px;
-$logo-width-mobile: 120px;
-$logo-height-mobile: 32px;
+$logo-width-desktop: 9.375rem; // 150px
+$logo-height-desktop: 5rem; // 80px
+$logo-width-mobile: 7.5rem; // 120px
+$logo-height-mobile: 2rem; // 32px
 
 // TYPOGRAPHY
-$font-size-sm: 14px;
-$font-size-md: 16px;
-$font-size-lg: 20px;
+$font-size-sm: 0.875rem; // 14px
+$font-size-md: 1rem; // 16px
+$font-size-lg: 1.25rem; // 20px
 $font-weight-normal: 400;
 $font-weight-bold: 700;
 $line-height-sm: 1.4;

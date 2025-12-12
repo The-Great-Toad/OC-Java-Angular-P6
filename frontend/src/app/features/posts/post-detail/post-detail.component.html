@@ -1,0 +1,80 @@
+<div class="container--feed">
+
+    <!-- Loading State -->
+    @if (isLoading()) {
+    <div class="loading-container">
+        <div class="spinner"></div>
+        <p>Chargement de l'article...</p>
+    </div>
+    }
+
+    <!-- Error State -->
+    @else if (errorMessage() && !post()) {
+    <div class="error-container">
+        <p class="error-message">{{ errorMessage() }}</p>
+        <button class="btn btn-primary" (click)="goBack()">Retour au fil</button>
+    </div>
+    }
+
+    <!-- Post Detail -->
+    @else if (post(); as currentPost) {
+    <!-- Back button -->
+    <section class="article-details-header">
+        <app-back-button></app-back-button>
+        <h2 class="post-detail-title">{{ currentPost.title }}</h2>
+    </section>
+
+    <article class="post-detail">
+        <!-- Post Header -->
+        <header class="post-detail__header">
+            <span class="post-detail__author">{{ currentPost.author }}</span>
+            <span class="post-detail__date">{{ formatDate(currentPost.createdAt) }}</span>
+            <span class="post-detail__topic">{{ currentPost.topic.name }}</span>
+        </header>
+
+        <!-- Post Content -->
+        <p class="post-detail__content">{{ currentPost.content }}</p>
+    </article>
+    <hr class="separator">
+
+    <!-- Comments Section -->
+    <section class="comments-section">
+        <p class="comments-section__title">
+            Commentaires @if (currentPost.comments.length > 0) {({{ currentPost.comments.length
+            }})}
+        </p>
+
+        <!-- Comments List -->
+        @if (currentPost.comments.length > 0) {
+        <div class="comments-list">
+            @for (comment of currentPost.comments; track comment.id) {
+            <div class="comment-wrapper">
+                <div class="comment-author">{{ comment.author }}</div>
+                <p class="comment-content">{{ comment.content }}</p>
+            </div>
+            }
+        </div>
+        }
+
+        <!-- Error message for comment submission -->
+        @if (errorMessage() && post()) {
+        <div class="error-container">
+            <p class="message message--error">{{ errorMessage() }}</p>
+        </div>
+        }
+        <!-- Comment Form -->
+        <form [formGroup]="commentForm" (ngSubmit)="onSubmitComment()" class="comment-form">
+            <div class="form-group">
+                <textarea id="comment-content" formControlName="content" class="form-input" rows="3"
+                          placeholder="Votre commentaire..."
+                          [class.form-input--error]="contentControl?.invalid && contentControl?.touched"></textarea>
+            </div>
+
+            <button type="submit" class="btn-ghost"
+                    [disabled]="commentForm.invalid || isSubmitting()">
+                <img src="icon_send.png" alt="send icon">
+            </button>
+        </form>
+    </section>
+    }
+</div>

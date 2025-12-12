@@ -41,6 +41,24 @@ export const routes: Routes = [
       import('./features/topics/topics.component').then((m) => m.TopicsComponent),
   },
   {
+    path: 'posts/create',
+    title: 'MDD - Créer un article',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/posts/create-post/create-post.component').then(
+        (m) => m.CreatePostComponent
+      ),
+  },
+  {
+    path: 'posts/:id',
+    title: 'MDD - Article',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/posts/post-detail/post-detail.component').then(
+        (m) => m.PostDetailComponent
+      ),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

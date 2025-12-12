@@ -1,7 +1,9 @@
+@use '../../../styles/variables' as *;
+
 .back-arrow-container {
-  position: absolute;
-  top: 1.5rem;
-  left: 1.5rem;
+  //   position: absolute;
+  //   top: $header-height-desktop + 1rem;
+  //   left: 1.5rem;
 
   .back-arrow {
     width: 2rem;
