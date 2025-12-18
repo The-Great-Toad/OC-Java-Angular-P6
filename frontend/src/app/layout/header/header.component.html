@@ -9,51 +9,12 @@
         <!-- Desktop Navigation -->
         <div class="header__nav-container">
             <nav class="header__nav header__nav--desktop">
-                <!-- logout -->
-                <button class="header__nav-logout-btn btn btn-danger" (click)="logout()">
-                    Se déconnecter
-                </button>
-
-                <!-- Topics -->
-                <a routerLink="/feed" routerLinkActive="header__nav-link--active"
-                   class="header__nav-link" (click)="closeMobileMenu()">
-                    Articles
-                </a>
-
-                <!-- Themes -->
-                <a routerLink="/topics" routerLinkActive="header__nav-link--active"
-                   class="header__nav-link" (click)="closeMobileMenu()">
-                    Thèmes
-                </a>
+                <ng-container *ngTemplateOutlet="navLinks"></ng-container>
             </nav>
 
             <!-- Desktop User Icon -->
             <div class="header__user header__user--desktop">
-                <button class="header__user-btn" [class.header__user-btn--active]="isProfilePage()"
-                        routerLink="/profile" (click)="closeMobileMenu()">
-                    @if (isProfilePage()) {
-                    <svg class="header__user-icon" width="25" height="28" viewBox="0 0 25 28"
-                         fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12.4748 14C16.0627 14 18.9748 11.0899 18.9748 7.5C18.9748 3.91015 16.0627 1 12.4748 1C8.88693 1 5.97485 3.91015 5.97485 7.5C5.97485 11.0899 8.88693 14 12.4748 14Z"
-                              stroke="#6c5ccf" stroke-width="2" stroke-linecap="round"
-                              stroke-linejoin="round" />
-                        <path d="M23.9748 27C23.9748 22.0294 18.7485 18 12.4748 18C6.20112 18 0.974854 22.0294 0.974854 27"
-                              stroke="#6c5ccf" stroke-width="2" stroke-linecap="round"
-                              stroke-linejoin="round" />
-                    </svg>
-                    } @else {
-                    <svg class="header__user-icon" width="25" height="28" viewBox="0 0 25 28"
-                         fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12.4748 14C16.0627 14 18.9748 11.0899 18.9748 7.5C18.9748 3.91015 16.0627 1 12.4748 1C8.88693 1 5.97485 3.91015 5.97485 7.5C5.97485 11.0899 8.88693 14 12.4748 14Z"
-                              stroke="#5e5e5e" stroke-width="2" stroke-linecap="round"
-                              stroke-linejoin="round" />
-                        <path d="M23.9748 27C23.9748 22.0294 18.7485 18 12.4748 18C6.20112 18 0.974854 22.0294 0.974854 27"
-                              stroke="#5e5e5e" stroke-width="2" stroke-linecap="round"
-                              stroke-linejoin="round" />
-                    </svg>
-                    }
-
-                </button>
+                <ng-container *ngTemplateOutlet="userProfileIcon"></ng-container>
             </div>
 
             <!-- Mobile Hamburger Menu -->
@@ -69,22 +30,65 @@
 
     <!-- Mobile Menu Overlay -->
     @if (isMobileMenuOpen() && isAuthenticated()) {
-    <div class="header__mobile-menu">
-        <nav class="header__mobile-nav">
-            <button class="btn btn-danger" (click)="logout()">
-                Se déconnecter
-            </button>
 
-            <a routerLink="/feed" routerLinkActive="header__nav-link--active"
-               class="header__nav-link" (click)="closeMobileMenu()">
-                Articles
-            </a>
+    <aside class="header__mobile-overlay" (click)="closeMobileMenu()"></aside>
+    <aside class="header__mobile-menu">
+        <div class="header__mobile-menu-wrapper">
+            <nav class="header__mobile-nav">
+                <ng-container *ngTemplateOutlet="navLinks"></ng-container>
+            </nav>
 
-            <a routerLink="/topics" routerLinkActive="header__nav-link--active"
-               class="header__nav-link" (click)="closeMobileMenu()">
-                Thèmes
-            </a>
-        </nav>
-    </div>
+            <div class="header__mobile-user">
+                <ng-container *ngTemplateOutlet="userProfileIcon"></ng-container>
+            </div>
+        </div>
+    </aside>
     }
 </header>
+
+<ng-template #navLinks>
+    <!-- Logout Button -->
+    <button class="btn btn-danger" (click)="logout()">
+        Se déconnecter
+    </button>
+
+    <!-- Feed -->
+    <a routerLink="/feed" routerLinkActive="header__nav-link--active" class="header__nav-link"
+       (click)="closeMobileMenu()">
+        Articles
+    </a>
+
+    <!-- Topics -->
+    <a routerLink="/topics" routerLinkActive="header__nav-link--active" class="header__nav-link"
+       (click)="closeMobileMenu()">
+        Thèmes
+    </a>
+</ng-template>
+
+<ng-template #userProfileIcon>
+    <button class="header__user-btn" [class.header__user-btn--active]="isProfilePage()"
+            routerLink="/profile" (click)="closeMobileMenu()">
+        @if (isProfilePage()) {
+        <svg class="header__user-icon" width="25" height="28" viewBox="0 0 25 28" fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.4748 14C16.0627 14 18.9748 11.0899 18.9748 7.5C18.9748 3.91015 16.0627 1 12.4748 1C8.88693 1 5.97485 3.91015 5.97485 7.5C5.97485 11.0899 8.88693 14 12.4748 14Z"
+                  stroke="#6c5ccf" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+            <path d="M23.9748 27C23.9748 22.0294 18.7485 18 12.4748 18C6.20112 18 0.974854 22.0294 0.974854 27"
+                  stroke="#6c5ccf" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+        </svg>
+        } @else {
+        <svg class="header__user-icon" width="25" height="28" viewBox="0 0 25 28" fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.4748 14C16.0627 14 18.9748 11.0899 18.9748 7.5C18.9748 3.91015 16.0627 1 12.4748 1C8.88693 1 5.97485 3.91015 5.97485 7.5C5.97485 11.0899 8.88693 14 12.4748 14Z"
+                  stroke="#5e5e5e" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+            <path d="M23.9748 27C23.9748 22.0294 18.7485 18 12.4748 18C6.20112 18 0.974854 22.0294 0.974854 27"
+                  stroke="#5e5e5e" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+        </svg>
+        }
+
+    </button>
+</ng-template>

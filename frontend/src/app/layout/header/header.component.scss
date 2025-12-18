@@ -31,11 +31,6 @@
       width: $logo-width-desktop;
       height: $logo-height-desktop;
       object-fit: contain;
-
-      @media (max-width: $breakpoint-mobile) {
-        width: $logo-width-mobile;
-        height: $logo-height-mobile;
-      }
     }
   }
 
@@ -138,36 +133,56 @@
     }
   }
 
+  &__mobile-overlay {
+    display: none;
+
+    @media (max-width: $breakpoint-mobile) {
+      display: block;
+      position: fixed;
+      width: 40vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(2px);
+    }
+  }
+
   &__mobile-menu {
     display: none;
 
     @media (max-width: $breakpoint-mobile) {
       display: block;
       position: fixed;
-      top: $header-height-mobile;
-      left: 0;
+      width: 60vw;
+      height: 100vh;
+      top: 0;
       right: 0;
       background: $background-white;
-      border-bottom: $border-default;
+      border: 1px solid $color-border;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       animation: slideDown 0.3s ease;
     }
   }
 
+  &__mobile-menu-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
   &__mobile-nav {
     display: flex;
     flex-direction: column;
-    padding: 16px;
-    gap: 16px;
+    align-items: flex-end;
+    margin-top: 3rem;
+  }
 
-    .header__nav-link {
-      padding: 12px 16px;
-      border-radius: 8px;
-      transition: background-color 0.2s ease;
-
-      &:hover {
-        background-color: $background-light;
-      }
-    }
+  .btn-danger,
+  .header__nav-link,
+  .header__mobile-user {
+    padding: 0.5rem 1rem;
   }
 }
