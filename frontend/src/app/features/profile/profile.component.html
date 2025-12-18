@@ -1,0 +1,111 @@
+<div class="status-messages">
+    <!-- Loading State -->
+    @if (isLoading()) {
+    <div class="loading-container">
+        <div class="spinner"></div>
+        <p>Chargement du profil...</p>
+    </div>
+    }
+    <!-- Error State -->
+    @if (errorMessage()) {
+    <div class="message message--error">
+        {{ errorMessage() }}
+    </div>
+    }
+    <!-- Success Message -->
+    @if (successMessage()) {
+    <div class="success-message">
+        {{ successMessage() }}
+    </div>
+    }
+</div>
+
+<!-- Profile Content -->
+@if (profile()) {
+<div class="card card--profile">
+    <h2>Profil utilisateur</h2>
+
+    <form [formGroup]="profileForm" (ngSubmit)="onSaveProfile()">
+        <!-- Username -->
+        <div class="form-group">
+            <input type="text" id="username" formControlName="username"
+                   placeholder="Nom d'utilisateur"
+                   [class.invalid]="username?.invalid && username?.touched" />
+            @if (username?.invalid && username?.touched) {
+            <span class="error">Le nom d'utilisateur est requis</span>
+            }
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            <input type="email" id="email" formControlName="email" placeholder="Email"
+                   [class.invalid]="email?.invalid && email?.touched" />
+            @if (email?.invalid && email?.touched) {
+            <span class="error">
+                @if (email?.errors?.['required']) {
+                L'email est requis
+                }
+                @if (email?.errors?.['email']) {
+                L'email n'est pas valide
+                }
+            </span>
+            }
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+            <input type="password" id="password" formControlName="password"
+                   placeholder="Choisissez un mot de passe"
+                   [class.invalid]="password?.invalid && password?.touched" />
+
+            <!-- Password Requirements -->
+            @if (password?.touched && password?.invalid && passwordErrors) {
+            <app-password-requirements
+                                       [passwordErrors]="passwordErrors"></app-password-requirements>
+            }
+        </div>
+
+        <div class="flex flex--center">
+            <button type="submit" class="btn btn-primary"
+                    [disabled]="profileForm.invalid || isSubmitting()">
+                @if (isSubmitting()) {
+                Sauvegarde en cours...
+                } @else {
+                Sauvegarder
+                }
+            </button>
+        </div>
+    </form>
+</div>
+
+<hr class="divider" />
+<!-- Subscriptions Section -->
+<div class="subscriptions-section">
+    <h2 class="subscriptions-title">Abonnements</h2>
+
+    @if (profile()!.subscriptions.length === 0) {
+    <div class="empty-subscriptions">
+        <p>Vous n'êtes abonné à aucun thème.</p>
+    </div>
+    } @else {
+    <div class="grid grid--2-cols">
+        @for (topic of profile()!.subscriptions; track topic.id) {
+        <div class="subscription-card">
+            <div class="subscription-info">
+                <h4 class="subscription-name">{{ topic.name }}</h4>
+                @if (topic.description) {
+                <p class="subscription-description">{{ topic.description }}</p>
+                }
+            </div>
+            <div class="unsubscribe">
+                <button type="button" class="btn btn-primary btn-unsubscribe"
+                        (click)="onUnsubscribe(topic.id)">
+                    Se désabonner
+                </button>
+            </div>
+        </div>
+        }
+    </div>
+    }
+</div>
+}

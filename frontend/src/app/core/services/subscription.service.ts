@@ -24,6 +24,6 @@ export class SubscriptionService {
    * @param topicId - The ID of the topic to unsubscribe from
    */
   unsubscribe(topicId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${topicId}/subscribe`);
+    return this.http.delete<void>(`${this.apiUrl}/${topicId}/unsubscribe`);
   }
 }

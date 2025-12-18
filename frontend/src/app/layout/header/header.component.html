@@ -29,7 +29,19 @@
 
             <!-- Desktop User Icon -->
             <div class="header__user header__user--desktop">
-                <button class="header__user-btn" routerLink="/profile" (click)="closeMobileMenu()">
+                <button class="header__user-btn" [class.header__user-btn--active]="isProfilePage()"
+                        routerLink="/profile" (click)="closeMobileMenu()">
+                    @if (isProfilePage()) {
+                    <svg class="header__user-icon" width="25" height="28" viewBox="0 0 25 28"
+                         fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.4748 14C16.0627 14 18.9748 11.0899 18.9748 7.5C18.9748 3.91015 16.0627 1 12.4748 1C8.88693 1 5.97485 3.91015 5.97485 7.5C5.97485 11.0899 8.88693 14 12.4748 14Z"
+                              stroke="#6c5ccf" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round" />
+                        <path d="M23.9748 27C23.9748 22.0294 18.7485 18 12.4748 18C6.20112 18 0.974854 22.0294 0.974854 27"
+                              stroke="#6c5ccf" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round" />
+                    </svg>
+                    } @else {
                     <svg class="header__user-icon" width="25" height="28" viewBox="0 0 25 28"
                          fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12.4748 14C16.0627 14 18.9748 11.0899 18.9748 7.5C18.9748 3.91015 16.0627 1 12.4748 1C8.88693 1 5.97485 3.91015 5.97485 7.5C5.97485 11.0899 8.88693 14 12.4748 14Z"
@@ -39,6 +51,8 @@
                               stroke="#5e5e5e" stroke-width="2" stroke-linecap="round"
                               stroke-linejoin="round" />
                     </svg>
+                    }
+
                 </button>
             </div>
 

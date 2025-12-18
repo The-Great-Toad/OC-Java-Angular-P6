@@ -12,12 +12,17 @@ import { AuthService } from '../../core/services/auth.service';
 })
 export class HeaderComponent {
   private authService = inject(AuthService);
+  private router = inject(Router);
 
   // Mobile menu state
   isMobileMenuOpen = signal<boolean>(false);
 
   protected isAuthenticated() {
     return this.authService.isAuthenticated();
+  }
+
+  protected isProfilePage(): boolean {
+    return this.router.url === '/profile';
   }
 
   protected toggleMobileMenu(): void {

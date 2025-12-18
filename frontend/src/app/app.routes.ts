@@ -59,6 +59,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'profile',
+    title: 'MDD - Mon profil',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/profile/profile.component').then((m) => m.ProfileComponent),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

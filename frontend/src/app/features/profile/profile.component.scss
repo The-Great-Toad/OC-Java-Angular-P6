@@ -1,0 +1,116 @@
+@use '../../../styles/variables' as *;
+
+.status-messages {
+  margin: 2rem 2rem 0 2rem;
+}
+
+// Success Message
+.success-message {
+  background: $color-success-light;
+  color: $color-success;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: $font-size-sm;
+}
+
+.card {
+  background: $background-white;
+  border-radius: 8px;
+  padding: 2rem;
+  width: 100%;
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 1.5rem;
+  }
+
+  &--profile {
+    max-width: 450px;
+    margin: auto;
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: $color-text;
+
+      @media (max-width: $breakpoint-mobile) {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+#username,
+#email,
+#password {
+  border: 2px solid $color-primary;
+  border-radius: 8px;
+}
+
+.divider {
+  margin: 0 5rem;
+}
+
+// Subscriptions Section
+.subscriptions-section {
+  background: $background-white;
+  border-radius: 8px;
+  padding: 2rem;
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 1.5rem;
+  }
+}
+
+.subscriptions-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: $font-weight-bold;
+  color: $color-text;
+  margin: 0 0 1.5rem 0;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 1.25rem;
+  }
+}
+
+// Empty Subscriptions
+.empty-subscriptions {
+  text-align: center;
+  padding: 2rem 0;
+
+  p {
+    color: $color-text-light;
+    font-size: $font-size-md;
+    margin: 0 0 1.5rem 0;
+  }
+}
+
+// Subscription Card
+.subscription-card {
+  padding: 1rem;
+  background: $color-bg;
+  border-radius: 8px;
+}
+
+.subscription-name {
+  margin-bottom: 0.75rem;
+}
+
+.subscription-description {
+  margin: 0 0 0.5rem 0;
+  color: $color-text-light;
+  font-size: $font-size-md;
+  line-height: $line-height-md;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.unsubscribe {
+  display: flex;
+  justify-content: center;
+}
