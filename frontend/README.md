@@ -1,59 +1,57 @@
-# MDD
+# Frontend MDD - Angular Application
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.10.
+User interface for MDD social network (Monde de Dév).
 
-## Development server
+## Tech Stack
 
-To start a local development server, run:
+- **Angular 20.3.0**
+- **TypeScript 5.7**
+- **RxJS 7.8**
 
-```bash
-ng serve
-```
+## Prerequisites
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- Node.js 18+
+- npm 10+
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Installation
 
 ```bash
-ng generate --help
+# 1. Install dependencies
+npm install
+
+# 2. Run development server
+npm run start
 ```
 
-## Building
+Application available at `http://localhost:4200`
 
-To build the project run:
+## Commands
 
 ```bash
-ng build
+npm start          # Start development server
+npm run build      # Production build
+npm test           # Unit tests
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Architecture
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+```
+src/app/
+├── core/              # Services, guards, interceptors, models
+├── features/          # Feature modules
+│   ├── auth/          # Authentication (login, register)
+│   ├── feed/          # News feed
+│   ├── topics/        # Topic list
+│   ├── posts/         # Articles (detail, creation)
+│   └── profile/       # User profile
+├── layout/            # Header, navigation
+└── shared/            # Reusable components
 ```
 
-## Running end-to-end tests
+## Configuration
 
-For end-to-end (e2e) testing, run:
+Backend API URL is defined in `src/environments/environment.ts`:
 
-```bash
-ng e2e
+```typescript
+apiUrl: 'http://localhost:8080/api';
 ```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
