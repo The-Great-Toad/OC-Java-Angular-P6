@@ -49,6 +49,10 @@
 
 .divider {
   margin: 0 5rem;
+
+  @media (max-width: $breakpoint-mobile) {
+    margin: 0 1.5rem;
+  }
 }
 
 // Subscriptions Section

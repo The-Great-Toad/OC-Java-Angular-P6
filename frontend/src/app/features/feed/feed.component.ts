@@ -41,10 +41,10 @@ export class FeedComponent implements OnInit {
       )
       .subscribe({
         next: (posts: Post[]) => {
-            this.isPostsEmpty.set(posts.length === 0);
-            if (!this.isPostsEmpty()) {
-                this.posts.set(this.sortPosts(posts));
-            }
+          this.isPostsEmpty.set(posts.length === 0);
+          if (!this.isPostsEmpty()) {
+            this.posts.set(this.sortPosts(posts));
+          }
         },
         error: (error: Error) => {
           console.error('Error loading posts:', error);
@@ -57,7 +57,7 @@ export class FeedComponent implements OnInit {
   public toggleSortOrder(): void {
     const newOrder = this.sortOrder() === 'desc' ? 'asc' : 'desc';
     this.sortOrder.set(newOrder);
-    this.posts.set(this.sortPosts([...this.posts()]));
+    this.posts.update((posts) => this.sortPosts([...posts]));
   }
 
   /** Sort posts based on the current sort order */

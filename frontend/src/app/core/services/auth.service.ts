@@ -16,7 +16,7 @@ export class AuthService {
   private readonly router = inject(Router);
   private readonly TOKEN_KEY = 'mdd_token';
 
-  public readonly isAuthenticated = signal<boolean>(this.hasToken());
+  public readonly isAuthenticated = signal<boolean>(this.hasValideToken());
 
   /** Register new user */
   register(request: RegisterRequest): Observable<RegisterResponse> {
@@ -54,8 +54,16 @@ export class AuthService {
     this.isAuthenticated.set(true);
   }
 
-  /** Check if a token exists in localStorage */
-  private hasToken(): boolean {
-    return !!localStorage.getItem(this.TOKEN_KEY);
+  /** Check if a token exists in localStorage and is valid */
+  private hasValideToken(): boolean {
+    const token = localStorage.getItem(this.TOKEN_KEY);
+    if (!token) return false;
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.exp * 1000 > Date.now();
+    } catch {
+      return false;
+    }
   }
 }

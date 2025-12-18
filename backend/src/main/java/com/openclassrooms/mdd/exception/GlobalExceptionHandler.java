@@ -83,7 +83,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler({TokenGenerationException.class, TokenValidationException.class})
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ProblemDetail handleTokenException(Exception e) {
         String errorType = e instanceof TokenValidationException ? "Token Validation Error" : "Token Generation Error";
         log.error("{}: {}", errorType, e.getMessage());

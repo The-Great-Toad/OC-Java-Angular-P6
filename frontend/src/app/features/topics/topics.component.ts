@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { finalize, forkJoin } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Topic } from '../../core/models/topic/topic.model';
 import { TopicService } from '../../core/services/topic.service';
 import { SubscriptionService } from '../../core/services/subscription.service';
@@ -77,7 +78,7 @@ export class TopicsComponent implements OnInit {
           updatedSet.add(topicId);
           this.subscribedTopicIds.set(updatedSet);
         },
-        error: (error: Error) => {
+        error: (error: HttpErrorResponse) => {
           console.error('Error subscribing to topic:', error);
           this.errorMessage.set("Erreur lors de l'abonnement au thème. Veuillez réessayer.");
         },

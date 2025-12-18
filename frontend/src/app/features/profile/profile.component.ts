@@ -91,7 +91,7 @@ export class ProfileComponent implements OnInit {
     const formValue = this.profileForm.value;
     const updates: UpdateProfileRequest = {
       username:
-        formValue.email && formValue.email !== this.profile()?.email
+        formValue.username && formValue.username !== this.profile()?.name
           ? formValue.username
           : undefined,
       email:
