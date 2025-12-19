@@ -1,3 +1,4 @@
+@if (isLoading() || errorMessage() || successMessage()) {
 <div class="status-messages">
     <!-- Loading State -->
     @if (isLoading()) {
@@ -19,6 +20,7 @@
     </div>
     }
 </div>
+}
 
 <!-- Profile Content -->
 @if (profile()) {
@@ -29,7 +31,7 @@
         <!-- Username -->
         <div class="form-group">
             <input type="text" id="username" formControlName="username"
-                   placeholder="Nom d'utilisateur"
+                   class="form-input--highlighted" placeholder="Nom d'utilisateur"
                    [class.invalid]="username?.invalid && username?.touched" />
             @if (username?.invalid && username?.touched) {
             <span class="error">Le nom d'utilisateur est requis</span>
@@ -38,8 +40,8 @@
 
         <!-- Email -->
         <div class="form-group">
-            <input type="email" id="email" formControlName="email" placeholder="Email"
-                   [class.invalid]="email?.invalid && email?.touched" />
+            <input type="email" id="email" formControlName="email" class="form-input--highlighted"
+                   placeholder="Email" [class.invalid]="email?.invalid && email?.touched" />
             @if (email?.invalid && email?.touched) {
             <span class="error">
                 @if (email?.errors?.['required']) {
@@ -55,7 +57,7 @@
         <!-- Password -->
         <div class="form-group">
             <input type="password" id="password" formControlName="password"
-                   placeholder="Choisissez un mot de passe"
+                   class="form-input--highlighted" placeholder="Choisissez un mot de passe"
                    [class.invalid]="password?.invalid && password?.touched" />
 
             <!-- Password Requirements -->

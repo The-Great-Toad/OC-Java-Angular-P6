@@ -6,22 +6,6 @@
 // Les utilitaires génériques (container, buttons, states)
 // sont définis dans styles/utilities/
 
-// Header spécifique topics
-.topics-header {
-  margin-bottom: 2rem;
-
-  h1 {
-    font-size: 1.75rem;
-    font-weight: $font-weight-bold;
-    color: $color-text;
-    margin: 0;
-
-    @media (max-width: $breakpoint-mobile) {
-      font-size: 1.5rem;
-    }
-  }
-}
-
 // Card topic (réutilise la base .card mais avec style spécifique)
 .topic-card {
   background: $color-bg;

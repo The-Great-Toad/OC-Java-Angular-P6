@@ -36,13 +36,13 @@
 
   &__nav-container {
     display: flex;
-    gap: 2rem;
+    gap: $spacing-nav-gap;
     align-items: center;
   }
 
   &__nav {
     display: flex;
-    gap: 2rem;
+    gap: $spacing-nav-gap;
 
     &--desktop {
       @media (max-width: $breakpoint-mobile) {
@@ -161,6 +161,7 @@
       background: $background-white;
       border: 1px solid $color-border;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      // Animation slideDown est définie dans utilities/interactions.scss
       animation: slideDown 0.3s ease;
     }
   }

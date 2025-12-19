@@ -4,6 +4,7 @@
 // ========================================
 
 // Importer tous les modules d'utilitaires
+@forward 'mixins';
 @forward 'layout';
 @forward 'components';
 @forward 'buttons';

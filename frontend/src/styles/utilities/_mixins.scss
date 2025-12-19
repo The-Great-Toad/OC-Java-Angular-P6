@@ -1,0 +1,32 @@
+@use '../variables' as *;
+
+// ========================================
+// MIXINS UTILITIES
+// ========================================
+
+// Responsive breakpoint mobile
+@mixin responsive-mobile {
+  @media (max-width: $breakpoint-mobile) {
+    @content;
+  }
+}
+
+// Line clamp (truncate text with ellipsis)
+@mixin line-clamp($lines: 3) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Card hover effect
+@mixin card-hover {
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+}

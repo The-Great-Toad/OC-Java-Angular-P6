@@ -1,4 +1,5 @@
 @use '../../../styles/variables' as *;
+@use '../../../styles/utilities/mixins' as *;
 
 // Styles spécifiques au feed uniquement
 .feed-header {
@@ -35,10 +36,5 @@
   color: $color-text;
   font-size: $font-size-md;
   line-height: $line-height-md;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  @include line-clamp(3);
 }

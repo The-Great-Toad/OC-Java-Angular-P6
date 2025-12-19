@@ -1,4 +1,6 @@
 @use '../../../styles/variables' as *;
+@use '../../../styles/utilities/mixins' as *;
+@use '../../../styles/utilities/forms' as *;
 
 .status-messages {
   margin: 2rem 2rem 0 2rem;
@@ -38,13 +40,6 @@
       }
     }
   }
-}
-
-#username,
-#email,
-#password {
-  border: 2px solid $color-primary;
-  border-radius: 8px;
 }
 
 .divider {
@@ -106,12 +101,7 @@
   color: $color-text-light;
   font-size: $font-size-md;
   line-height: $line-height-md;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  @include line-clamp(3);
 }
 
 .unsubscribe {

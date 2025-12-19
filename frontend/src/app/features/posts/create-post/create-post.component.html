@@ -18,7 +18,8 @@
                 @if (isLoadingTopics()) {
                 <p class="form-hint">Chargement des thèmes...</p>
                 } @else {
-                <select id="topic" formControlName="topicId" class="form-input"
+                <select id="topic" formControlName="topicId"
+                        class="form-input form-input--highlighted"
                         [class.form-input--error]="topicIdControl?.invalid && topicIdControl?.touched"
                         required>
                     <option value="" disabled selected hidden>Sélectionner un thème
@@ -37,8 +38,8 @@
 
             <!-- Title -->
             <div class="form-group">
-                <input type="text" id="title" formControlName="title" class="form-input"
-                       placeholder="Titre de l'article"
+                <input type="text" id="title" formControlName="title"
+                       class="form-input form-input--highlighted" placeholder="Titre de l'article"
                        [class.form-input--error]="titleControl?.invalid && titleControl?.touched" />
                 @if (titleControl?.invalid && titleControl?.touched) {
                 @if (titleControl?.errors?.['required']) {
@@ -55,8 +56,9 @@
 
             <!-- Content -->
             <div class="form-group">
-                <textarea id="content" formControlName="content" class="form-input form-textarea"
-                          rows="8" placeholder="Contenu de l'article..."
+                <textarea id="content" formControlName="content"
+                          class="form-input form-input--highlighted form-textarea" rows="8"
+                          placeholder="Contenu de l'article..."
                           [class.form-input--error]="contentControl?.invalid && contentControl?.touched"></textarea>
                 @if (contentControl?.invalid && contentControl?.touched) {
                 @if (contentControl?.errors?.['required']) {

@@ -1,5 +1,5 @@
 @use '../../../../styles/variables' as *;
-@use 'sass:color';
+@use '../../../../styles/utilities/forms' as *;
 
 // Back button position
 .article-details-header {
@@ -111,11 +111,6 @@
     grid-template-columns: 1fr auto;
     margin: 1rem 0 0 0;
   }
-}
-
-.form-input--error {
-  border-color: $color-danger;
-  background: color.scale($color-danger, $lightness: 93.603305785%);
 }
 
 // Icon in button
