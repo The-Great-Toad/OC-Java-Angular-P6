@@ -1,0 +1,11 @@
+<div class="empty-container">
+    <p>{{ message }}</p>
+    @if (hint) {
+    <p class="empty-hint">{{ hint }}</p>
+    }
+    @if (buttonText) {
+    <button class="btn btn-primary" (click)="onAction()">
+        {{ buttonText }}
+    </button>
+    }
+</div>

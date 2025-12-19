@@ -1,5 +1,5 @@
 @use '../../../../styles/variables' as *;
-@use 'sass:color';
+@use '../../../../styles/utilities/forms' as *;
 
 .create-post-card {
   max-width: 700px;
@@ -40,11 +40,6 @@ select:invalid {
   }
 }
 
-.form-input--error {
-  border-color: $color-danger;
-  background: color.scale($color-danger, $lightness: 93.603305785%);
-}
-
 // Required indicator
 .required {
   color: $color-danger;
@@ -59,10 +54,10 @@ select:invalid {
 
 // Inline error (general)
 .error-message-inline {
-  background: lighten($color-danger, 45%);
+  background: $color-danger-light;
   color: $color-danger;
   padding: 1rem;
-  border-radius: 8px;
+  border-radius: $border-radius-default;
   margin-bottom: 1.5rem;
   font-size: $font-size-sm;
 }

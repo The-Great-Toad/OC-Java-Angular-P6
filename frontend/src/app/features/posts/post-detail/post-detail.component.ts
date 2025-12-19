@@ -9,11 +9,21 @@ import { CommentService } from '../../../core/services/comment.service';
 import { BackButton } from '../../../layout/back-button/back-button';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { finalize } from 'rxjs';
+import { LoadingStateComponent } from '../../../core/components/loading-state/loading-state.component';
+import { ErrorStateComponent } from '../../../core/components/error-state/error-state.component';
+import { FrenchDatePipe } from '../../../core/pipes/french-date.pipe';
 
 @Component({
   selector: 'app-post-detail',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, BackButton],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    BackButton,
+    LoadingStateComponent,
+    ErrorStateComponent,
+    FrenchDatePipe,
+  ],
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.scss',
 })
@@ -59,7 +69,6 @@ export class PostDetailComponent implements OnInit {
           this.post.set(post);
         },
         error: (error: Error) => {
-          console.error('Error loading post:', error);
           this.errorMessage.set("Erreur lors du chargement de l'article. Veuillez réessayer.");
         },
       });
@@ -94,7 +103,6 @@ export class PostDetailComponent implements OnInit {
           this.commentForm.reset();
         },
         error: (error: Error) => {
-          console.error('Error creating comment:', error);
           this.errorMessage.set("Erreur lors de l'ajout du commentaire. Veuillez réessayer.");
         },
       });
@@ -102,15 +110,6 @@ export class PostDetailComponent implements OnInit {
 
   protected goBack(): void {
     this.router.navigate(['/feed']);
-  }
-
-  protected formatDate(dateString: string): string {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('fr-FR', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-    });
   }
 
   get contentControl() {

@@ -47,3 +47,15 @@
     margin-top: 0.25rem;
   }
 }
+
+// Form input error state
+.form-input--error {
+  border-color: $color-danger;
+  background: $color-danger-bg-light;
+}
+
+// Form input highlighted (e.g., profile fields)
+.form-input--highlighted {
+  border: 2px solid $color-primary !important;
+  border-radius: $border-radius-default !important;
+}

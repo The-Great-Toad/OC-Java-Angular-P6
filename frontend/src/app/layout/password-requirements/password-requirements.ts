@@ -8,5 +8,11 @@ import { ValidationErrors } from '@angular/forms';
   styleUrl: './password-requirements.scss',
 })
 export class PasswordRequirements {
-  public passwordErrors = input<any>({});
+  public passwordErrors = input<ValidationErrors>({
+    hasMinLength: false,
+    hasUpperCase: false,
+    hasLowerCase: false,
+    hasNumeric: false,
+    hasSpecialChar: false,
+  });
 }

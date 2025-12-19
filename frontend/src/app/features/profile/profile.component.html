@@ -1,24 +1,8 @@
-<div class="status-messages">
-    <!-- Loading State -->
-    @if (isLoading()) {
-    <div class="loading-container">
-        <div class="spinner"></div>
-        <p>Chargement du profil...</p>
-    </div>
-    }
-    <!-- Error State -->
-    @if (errorMessage()) {
-    <div class="message message--error">
-        {{ errorMessage() }}
-    </div>
-    }
-    <!-- Success Message -->
-    @if (successMessage()) {
-    <div class="success-message">
-        {{ successMessage() }}
-    </div>
-    }
-</div>
+@if (isLoading() || errorMessage() || successMessage()) {
+<app-status-messages [isLoading]="isLoading()" [loadingMessage]="'Chargement du profil...'"
+                     [errorMessage]="errorMessage()" [successMessage]="successMessage()">
+</app-status-messages>
+}
 
 <!-- Profile Content -->
 @if (profile()) {
@@ -29,7 +13,7 @@
         <!-- Username -->
         <div class="form-group">
             <input type="text" id="username" formControlName="username"
-                   placeholder="Nom d'utilisateur"
+                   class="form-input--highlighted" placeholder="Nom d'utilisateur"
                    [class.invalid]="username?.invalid && username?.touched" />
             @if (username?.invalid && username?.touched) {
             <span class="error">Le nom d'utilisateur est requis</span>
@@ -38,8 +22,8 @@
 
         <!-- Email -->
         <div class="form-group">
-            <input type="email" id="email" formControlName="email" placeholder="Email"
-                   [class.invalid]="email?.invalid && email?.touched" />
+            <input type="email" id="email" formControlName="email" class="form-input--highlighted"
+                   placeholder="Email" [class.invalid]="email?.invalid && email?.touched" />
             @if (email?.invalid && email?.touched) {
             <span class="error">
                 @if (email?.errors?.['required']) {
@@ -55,19 +39,18 @@
         <!-- Password -->
         <div class="form-group">
             <input type="password" id="password" formControlName="password"
-                   placeholder="Choisissez un mot de passe"
+                   class="form-input--highlighted" placeholder="Choisissez un mot de passe"
                    [class.invalid]="password?.invalid && password?.touched" />
 
-            <!-- Password Requirements -->
-            @if (password?.touched && password?.invalid && passwordErrors) {
+            <!-- Password Requirements - Affiché dès que l'utilisateur tape -->
+            @if (password?.value) {
             <app-password-requirements
                                        [passwordErrors]="passwordErrors"></app-password-requirements>
             }
         </div>
 
         <div class="flex flex--center">
-            <button type="submit" class="btn btn-primary"
-                    [disabled]="profileForm.invalid || isSubmitting()">
+            <button type="submit" class="btn btn-primary" [disabled]="isSubmitting()">
                 @if (isSubmitting()) {
                 Sauvegarde en cours...
                 } @else {

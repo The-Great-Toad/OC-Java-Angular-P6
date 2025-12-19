@@ -28,6 +28,7 @@ $background-light: #f9f9f9;
 
 // BORDERS
 $border-default: 1px solid $color-border;
+$border-radius-default: 8px;
 
 // HEIGHTS
 $header-height-desktop: 4.375rem; // 70px
@@ -50,3 +51,10 @@ $font-weight-normal: 400;
 $font-weight-bold: 700;
 $line-height-sm: 1.4;
 $line-height-md: 1.6;
+
+// SPACING
+$spacing-nav-gap: 2rem;
+$spacing-section: 5rem;
+
+// FORM COLORS
+$color-danger-bg-light: #fdeaea; // Lighten danger by ~46%

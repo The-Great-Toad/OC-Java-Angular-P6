@@ -7,10 +7,11 @@ import { LoginRequest } from '../../../core/models/auth/login-request.model';
 import { BackButton } from '../../../layout/back-button/back-button';
 import { finalize } from 'rxjs/internal/operators/finalize';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ErrorStateComponent } from '../../../core/components/error-state/error-state.component';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, ReactiveFormsModule, BackButton],
+  imports: [CommonModule, ReactiveFormsModule, BackButton, ErrorStateComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })

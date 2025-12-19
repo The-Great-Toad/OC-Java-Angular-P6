@@ -7,11 +7,14 @@ import { TopicService } from '../../core/services/topic.service';
 import { SubscriptionService } from '../../core/services/subscription.service';
 import { UserService } from '../../core/services/user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { LoadingStateComponent } from '../../core/components/loading-state/loading-state.component';
+import { ErrorStateComponent } from '../../core/components/error-state/error-state.component';
+import { EmptyStateComponent } from '../../core/components/empty-state/empty-state.component';
 
 @Component({
   selector: 'app-topics',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LoadingStateComponent, ErrorStateComponent, EmptyStateComponent],
   templateUrl: './topics.component.html',
   styleUrl: './topics.component.scss',
 })
@@ -56,7 +59,6 @@ export class TopicsComponent implements OnInit {
           this.subscribedTopicIds.set(subscribedIds);
         },
         error: (error: Error) => {
-          console.error('Error loading topics:', error);
           this.errorMessage.set('Erreur lors du chargement des thèmes. Veuillez réessayer.');
         },
       });
@@ -79,7 +81,6 @@ export class TopicsComponent implements OnInit {
           this.subscribedTopicIds.set(updatedSet);
         },
         error: (error: HttpErrorResponse) => {
-          console.error('Error subscribing to topic:', error);
           this.errorMessage.set("Erreur lors de l'abonnement au thème. Veuillez réessayer.");
         },
       });

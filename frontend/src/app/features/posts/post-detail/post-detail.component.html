@@ -1,19 +1,11 @@
 <div class="container--feed">
 
-    <!-- Loading State -->
+    <!-- Loading & Error States -->
     @if (isLoading()) {
-    <div class="loading-container">
-        <div class="spinner"></div>
-        <p>Chargement de l'article...</p>
-    </div>
-    }
-
-    <!-- Error State -->
-    @else if (errorMessage() && !post()) {
-    <div class="error-container">
-        <p class="error-message">{{ errorMessage() }}</p>
-        <button class="btn btn-primary" (click)="goBack()">Retour au fil</button>
-    </div>
+    <app-loading-state message="Chargement de l'article..."></app-loading-state>
+    } @else if (errorMessage() && !post()) {
+    <app-error-state [message]="errorMessage()!" [showRetryButton]="true"
+                     (retry)="goBack()"></app-error-state>
     }
 
     <!-- Post Detail -->
@@ -28,7 +20,7 @@
         <!-- Post Header -->
         <header class="post-detail__header">
             <span class="post-detail__author">{{ currentPost.author }}</span>
-            <span class="post-detail__date">{{ formatDate(currentPost.createdAt) }}</span>
+            <span class="post-detail__date">{{ currentPost.createdAt | frenchDate }}</span>
             <span class="post-detail__topic">{{ currentPost.topic.name }}</span>
         </header>
 
@@ -58,9 +50,7 @@
 
         <!-- Error message for comment submission -->
         @if (errorMessage() && post()) {
-        <div class="error-container">
-            <p class="message message--error">{{ errorMessage() }}</p>
-        </div>
+        <app-error-state [message]="errorMessage()!"></app-error-state>
         }
         <!-- Comment Form -->
         <form [formGroup]="commentForm" (ngSubmit)="onSubmitComment()" class="comment-form">

@@ -22,29 +22,19 @@
         </button>
     </div>
 
-    <!-- Loading State -->
+    <!-- Loading & Error States -->
     @if (isLoading()) {
-    <div class="loading-container">
-        <div class="spinner"></div>
-        <p>Chargement des articles...</p>
-    </div>
-    }
-    <!-- Error State -->
-    @else if (errorMessage()) {
-    <div class="error-container">
-        <p class="message message--error">{{ errorMessage() }}</p>
-        <button class="btn btn-tertiary" (click)="getUserFeed()">Réessayer</button>
-    </div>
+    <app-loading-state message="Chargement des articles..."></app-loading-state>
+    } @else if (errorMessage()) {
+    <app-error-state [message]="errorMessage()!" [showRetryButton]="true"
+                     (retry)="getUserFeed()"></app-error-state>
     }
     <!-- Empty State -->
     @else if (isPostsEmpty()) {
-    <div class="empty-container">
-        <p>Aucun article disponible.</p>
-        <p class="empty-hint">Abonnez-vous à des thèmes pour voir les articles correspondants.</p>
-        <button class="btn btn-primary" (click)="router.navigate(['/topics'])">
-            Voir les thèmes
-        </button>
-    </div>
+    <app-empty-state message="Aucun article disponible."
+                     hint="Abonnez-vous à des thèmes pour voir les articles correspondants."
+                     buttonText="Voir les thèmes" (action)="router.navigate(['/topics'])">
+    </app-empty-state>
     }
     <!-- Posts List -->
     @else {
@@ -56,7 +46,7 @@
             <h4 class="post-title">{{ post.title }}</h4>
             <!-- Author and Date -->
             <div class="post-meta">
-                <div class="post-date">{{ formatDate(post.createdAt) }}</div>
+                <div class="post-date">{{ post.createdAt | frenchDate }}</div>
                 <div class="post-author">{{ post.author }}</div>
             </div>
             <!-- content -->

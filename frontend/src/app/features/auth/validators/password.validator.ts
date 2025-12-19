@@ -13,21 +13,20 @@ export function passwordValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
 
-    if (!value) {
-      return null;
-    }
-
-    const hasMinLength = value.length >= 8;
-    const hasUpperCase = /[A-Z]/.test(value);
-    const hasLowerCase = /[a-z]/.test(value);
-    const hasNumeric = /[0-9]/.test(value);
-    const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value);
+    const hasMinLength = value ? value.length >= 8 : false;
+    const hasUpperCase = value ? /[A-Z]/.test(value) : false;
+    const hasLowerCase = value ? /[a-z]/.test(value) : false;
+    const hasNumeric = value ? /[0-9]/.test(value) : false;
+    const hasSpecialChar = value ? /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value) : false;
 
     const passwordValid =
       hasMinLength && hasUpperCase && hasLowerCase && hasNumeric && hasSpecialChar;
 
-    return !passwordValid
-      ? {
+    // Toujours retourner l'état des critères pour affichage en temps réel
+    // mais ne marquer comme invalide que si le mot de passe ne respecte pas tous les critères
+    return passwordValid
+      ? null // Mot de passe valide, pas d'erreur
+      : {
           passwordStrength: {
             hasMinLength,
             hasUpperCase,
@@ -35,7 +34,6 @@ export function passwordValidator(): ValidatorFn {
             hasNumeric,
             hasSpecialChar,
           },
-        }
-      : null;
+        };
   };
 }

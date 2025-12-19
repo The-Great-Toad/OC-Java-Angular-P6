@@ -1,0 +1,22 @@
+@use '../../../../styles/variables' as *;
+
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+
+  p {
+    color: $color-text;
+    font-size: $font-size-md;
+    margin-bottom: 0.5rem;
+  }
+
+  .empty-hint {
+    color: $color-text-light;
+    font-size: $font-size-sm;
+    margin-bottom: 1.5rem;
+  }
+}

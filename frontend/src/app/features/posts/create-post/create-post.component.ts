@@ -46,7 +46,6 @@ export class CreatePostComponent implements OnInit {
       error: (error: Error) => {
         this.errorMessage.set('Erreur lors du chargement des thèmes.');
         this.isLoadingTopics.set(false);
-        console.error('Error loading topics:', error);
       },
     });
   }
@@ -76,7 +75,6 @@ export class CreatePostComponent implements OnInit {
       error: (error: Error) => {
         this.errorMessage.set("Erreur lors de la création de l'article. Veuillez réessayer.");
         this.isSubmitting.set(false);
-        console.error('Error creating post:', error);
       },
     });
   }

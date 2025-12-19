@@ -1,22 +1,10 @@
 @use '../../../styles/variables' as *;
-
-.status-messages {
-  margin: 2rem 2rem 0 2rem;
-}
-
-// Success Message
-.success-message {
-  background: $color-success-light;
-  color: $color-success;
-  padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
-  font-size: $font-size-sm;
-}
+@use '../../../styles/utilities/mixins' as *;
+@use '../../../styles/utilities/forms' as *;
 
 .card {
   background: $background-white;
-  border-radius: 8px;
+  border-radius: $border-radius-default;
   padding: 2rem;
   width: 100%;
 
@@ -40,13 +28,6 @@
   }
 }
 
-#username,
-#email,
-#password {
-  border: 2px solid $color-primary;
-  border-radius: 8px;
-}
-
 .divider {
   margin: 0 5rem;
 
@@ -58,7 +39,7 @@
 // Subscriptions Section
 .subscriptions-section {
   background: $background-white;
-  border-radius: 8px;
+  border-radius: $border-radius-default;
   padding: 2rem;
 
   @media (max-width: $breakpoint-mobile) {
@@ -94,7 +75,7 @@
 .subscription-card {
   padding: 1rem;
   background: $color-bg;
-  border-radius: 8px;
+  border-radius: $border-radius-default;
 }
 
 .subscription-name {
@@ -106,12 +87,7 @@
   color: $color-text-light;
   font-size: $font-size-md;
   line-height: $line-height-md;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  @include line-clamp(3);
 }
 
 .unsubscribe {

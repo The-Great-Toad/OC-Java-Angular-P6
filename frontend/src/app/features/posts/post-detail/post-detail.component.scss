@@ -1,5 +1,5 @@
 @use '../../../../styles/variables' as *;
-@use 'sass:color';
+@use '../../../../styles/utilities/forms' as *;
 
 // Back button position
 .article-details-header {
@@ -46,7 +46,7 @@
 // Comments Section
 .comments-section {
   background: $background-white;
-  border-radius: 8px;
+  border-radius: $border-radius-default;
   padding: 0 3rem;
 
   @media (max-width: $breakpoint-mobile) {
@@ -84,7 +84,7 @@
 
 .comment-content {
   background: $color-bg;
-  border-radius: 8px;
+  border-radius: $border-radius-default;
   padding: 1rem;
   font-size: $font-size-md;
   line-height: $line-height-md;
@@ -113,11 +113,6 @@
   }
 }
 
-.form-input--error {
-  border-color: $color-danger;
-  background: color.scale($color-danger, $lightness: 93.603305785%);
-}
-
 // Icon in button
 .btn-ghost:not(:disabled) {
   cursor: pointer;
@@ -133,8 +128,4 @@
   margin: 0;
 }
 
-// Inline error (for comment submission)
-.error-container {
-  margin-top: 1rem;
-  padding: 0 0 0 2rem;
-}
+// Error state component handles its own styling
