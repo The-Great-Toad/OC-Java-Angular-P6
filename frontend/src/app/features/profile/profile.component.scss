@@ -2,20 +2,6 @@
 @use '../../../styles/utilities/mixins' as *;
 @use '../../../styles/utilities/forms' as *;
 
-.status-messages {
-  margin: 2rem 2rem 0 2rem;
-}
-
-// Success Message
-.success-message {
-  background: $color-success-light;
-  color: $color-success;
-  padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
-  font-size: $font-size-sm;
-}
-
 .card {
   background: $background-white;
   border-radius: 8px;

@@ -1,25 +1,7 @@
 @if (isLoading() || errorMessage() || successMessage()) {
-<div class="status-messages">
-    <!-- Loading State -->
-    @if (isLoading()) {
-    <div class="loading-container">
-        <div class="spinner"></div>
-        <p>Chargement du profil...</p>
-    </div>
-    }
-    <!-- Error State -->
-    @if (errorMessage()) {
-    <div class="message message--error">
-        {{ errorMessage() }}
-    </div>
-    }
-    <!-- Success Message -->
-    @if (successMessage()) {
-    <div class="success-message">
-        {{ successMessage() }}
-    </div>
-    }
-</div>
+<app-status-messages [isLoading]="isLoading()" [loadingMessage]="'Chargement du profil...'"
+                     [errorMessage]="errorMessage()" [successMessage]="successMessage()">
+</app-status-messages>
 }
 
 <!-- Profile Content -->

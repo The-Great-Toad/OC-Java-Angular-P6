@@ -1,0 +1,11 @@
+@use '../../../../styles/variables' as *;
+
+.success-message {
+  background: $color-success-light;
+  color: $color-success;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: $font-size-sm;
+  text-align: center;
+}

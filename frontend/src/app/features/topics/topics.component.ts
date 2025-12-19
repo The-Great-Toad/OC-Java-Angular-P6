@@ -7,11 +7,13 @@ import { TopicService } from '../../core/services/topic.service';
 import { SubscriptionService } from '../../core/services/subscription.service';
 import { UserService } from '../../core/services/user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { LoadingStateComponent } from '../../core/components/loading-state/loading-state.component';
+import { ErrorStateComponent } from '../../core/components/error-state/error-state.component';
 
 @Component({
   selector: 'app-topics',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LoadingStateComponent, ErrorStateComponent],
   templateUrl: './topics.component.html',
   styleUrl: './topics.component.scss',
 })

@@ -1,18 +1,11 @@
 <div class="container--feed">
 
-    <!-- Loading State -->
+    <!-- Loading & Error States -->
     @if (isLoading()) {
-    <div class="loading-container">
-        <div class="spinner"></div>
-        <p>Chargement des thèmes...</p>
-    </div>
-    }
-    <!-- Error State -->
-    @else if (errorMessage()) {
-    <div class="error-container">
-        <p class="error-message">{{ errorMessage() }}</p>
-        <button class="btn btn-primary" (click)="retryLoad()">Réessayer</button>
-    </div>
+    <app-loading-state message="Chargement des thèmes..."></app-loading-state>
+    } @else if (errorMessage()) {
+    <app-error-state [message]="errorMessage()!" [showRetryButton]="true"
+                     (retry)="retryLoad()"></app-error-state>
     }
     <!-- Topics List -->
     @else {

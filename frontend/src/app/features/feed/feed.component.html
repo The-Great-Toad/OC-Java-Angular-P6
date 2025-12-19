@@ -22,19 +22,12 @@
         </button>
     </div>
 
-    <!-- Loading State -->
+    <!-- Loading & Error States -->
     @if (isLoading()) {
-    <div class="loading-container">
-        <div class="spinner"></div>
-        <p>Chargement des articles...</p>
-    </div>
-    }
-    <!-- Error State -->
-    @else if (errorMessage()) {
-    <div class="error-container">
-        <p class="message message--error">{{ errorMessage() }}</p>
-        <button class="btn btn-tertiary" (click)="getUserFeed()">Réessayer</button>
-    </div>
+    <app-loading-state message="Chargement des articles..."></app-loading-state>
+    } @else if (errorMessage()) {
+    <app-error-state [message]="errorMessage()!" [showRetryButton]="true"
+                     (retry)="getUserFeed()"></app-error-state>
     }
     <!-- Empty State -->
     @else if (isPostsEmpty()) {

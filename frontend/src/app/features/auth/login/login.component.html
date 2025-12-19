@@ -6,9 +6,7 @@
         <h1>Connexion</h1>
 
         @if (errorMessage()) {
-        <div class="message message--error">
-            {{ errorMessage() }}
-        </div>
+        <app-error-state [message]="errorMessage()!"></app-error-state>
         }
 
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">

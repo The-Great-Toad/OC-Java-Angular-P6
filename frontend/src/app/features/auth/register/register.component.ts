@@ -9,10 +9,17 @@ import { BackButton } from '../../../layout/back-button/back-button';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { finalize } from 'rxjs';
 import { PasswordRequirements } from '../../../layout/password-requirements/password-requirements';
+import { ErrorStateComponent } from '../../../core/components/error-state/error-state.component';
 
 @Component({
   selector: 'app-register',
-  imports: [CommonModule, ReactiveFormsModule, BackButton, PasswordRequirements],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    BackButton,
+    PasswordRequirements,
+    ErrorStateComponent,
+  ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })

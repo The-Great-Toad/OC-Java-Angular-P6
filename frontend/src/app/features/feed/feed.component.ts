@@ -5,11 +5,13 @@ import { PostService } from '../../core/services/post.service';
 import { Post } from '../../core/models/post/post.model';
 import { finalize } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { LoadingStateComponent } from '../../core/components/loading-state/loading-state.component';
+import { ErrorStateComponent } from '../../core/components/error-state/error-state.component';
 
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LoadingStateComponent, ErrorStateComponent],
   templateUrl: './feed.component.html',
   styleUrl: './feed.component.scss',
 })

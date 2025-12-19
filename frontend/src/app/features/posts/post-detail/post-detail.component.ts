@@ -9,11 +9,19 @@ import { CommentService } from '../../../core/services/comment.service';
 import { BackButton } from '../../../layout/back-button/back-button';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { finalize } from 'rxjs';
+import { LoadingStateComponent } from '../../../core/components/loading-state/loading-state.component';
+import { ErrorStateComponent } from '../../../core/components/error-state/error-state.component';
 
 @Component({
   selector: 'app-post-detail',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, BackButton],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    BackButton,
+    LoadingStateComponent,
+    ErrorStateComponent,
+  ],
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.scss',
 })

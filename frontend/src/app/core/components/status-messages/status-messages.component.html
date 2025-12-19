@@ -1,0 +1,18 @@
+<div class="status-messages">
+    <!-- Loading State -->
+    @if (isLoading) {
+    <app-loading-state [message]="loadingMessage"></app-loading-state>
+    }
+
+    <!-- Error State -->
+    @if (errorMessage) {
+    <app-error-state [message]="errorMessage" [showRetryButton]="showRetryButton"
+                     [retryButtonLabel]="retryButtonLabel" (retry)="onRetry()">
+    </app-error-state>
+    }
+
+    <!-- Success State -->
+    @if (successMessage) {
+    <app-success-state [message]="successMessage"></app-success-state>
+    }
+</div>

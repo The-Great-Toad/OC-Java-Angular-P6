@@ -8,13 +8,14 @@ import { UserProfile } from '../../core/models/user/user-profile.model';
 import { UpdateProfileRequest } from '../../core/models/user/update-profile-request.model';
 import { passwordValidator } from '../auth/validators/password.validator';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { StatusMessagesComponent } from '../../core/components/status-messages/status-messages.component';
 import { finalize } from 'rxjs';
 import { PasswordRequirements } from '../../layout/password-requirements/password-requirements';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, PasswordRequirements],
+  imports: [CommonModule, ReactiveFormsModule, PasswordRequirements, StatusMessagesComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
 })
