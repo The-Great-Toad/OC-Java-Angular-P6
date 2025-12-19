@@ -32,9 +32,7 @@
     </div>
     <!-- Empty State -->
     @if (topics().length === 0) {
-    <div class="empty-container">
-        <p>Aucun thème disponible pour le moment.</p>
-    </div>
+    <app-empty-state message="Aucun thème disponible pour le moment."></app-empty-state>
     }
     }
 </div>

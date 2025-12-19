@@ -31,13 +31,10 @@
     }
     <!-- Empty State -->
     @else if (isPostsEmpty()) {
-    <div class="empty-container">
-        <p>Aucun article disponible.</p>
-        <p class="empty-hint">Abonnez-vous à des thèmes pour voir les articles correspondants.</p>
-        <button class="btn btn-primary" (click)="router.navigate(['/topics'])">
-            Voir les thèmes
-        </button>
-    </div>
+    <app-empty-state message="Aucun article disponible."
+                     hint="Abonnez-vous à des thèmes pour voir les articles correspondants."
+                     buttonText="Voir les thèmes" (action)="router.navigate(['/topics'])">
+    </app-empty-state>
     }
     <!-- Posts List -->
     @else {

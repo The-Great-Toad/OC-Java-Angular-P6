@@ -1,10 +1,6 @@
-@use '../variables' as *;
+@use '../../../../styles/variables' as *;
 
-// ========================================
-// STATE CONTAINERS (empty state)
-// ========================================
-
-.state-container {
+.empty-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,10 +13,6 @@
     font-size: $font-size-md;
     margin-bottom: 0.5rem;
   }
-}
-
-.empty-container {
-  @extend .state-container;
 
   .empty-hint {
     color: $color-text-light;

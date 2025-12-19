@@ -7,11 +7,12 @@ import { finalize } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LoadingStateComponent } from '../../core/components/loading-state/loading-state.component';
 import { ErrorStateComponent } from '../../core/components/error-state/error-state.component';
+import { EmptyStateComponent } from '../../core/components/empty-state/empty-state.component';
 
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [CommonModule, LoadingStateComponent, ErrorStateComponent],
+  imports: [CommonModule, LoadingStateComponent, ErrorStateComponent, EmptyStateComponent],
   templateUrl: './feed.component.html',
   styleUrl: './feed.component.scss',
 })
