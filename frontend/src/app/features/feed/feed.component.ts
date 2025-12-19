@@ -8,11 +8,18 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LoadingStateComponent } from '../../core/components/loading-state/loading-state.component';
 import { ErrorStateComponent } from '../../core/components/error-state/error-state.component';
 import { EmptyStateComponent } from '../../core/components/empty-state/empty-state.component';
+import { FrenchDatePipe } from '../../core/pipes/french-date.pipe';
 
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [CommonModule, LoadingStateComponent, ErrorStateComponent, EmptyStateComponent],
+  imports: [
+    CommonModule,
+    LoadingStateComponent,
+    ErrorStateComponent,
+    EmptyStateComponent,
+    FrenchDatePipe,
+  ],
   templateUrl: './feed.component.html',
   styleUrl: './feed.component.scss',
 })
@@ -68,16 +75,6 @@ export class FeedComponent implements OnInit {
       const dateA = new Date(a.createdAt).getTime();
       const dateB = new Date(b.createdAt).getTime();
       return this.sortOrder() === 'desc' ? dateB - dateA : dateA - dateB;
-    });
-  }
-
-  /** Format a date string to a localized French date */
-  public formatDate(dateString: string): string {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('fr-FR', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
     });
   }
 

@@ -9,7 +9,7 @@
 // Card topic (réutilise la base .card mais avec style spécifique)
 .topic-card {
   background: $color-bg;
-  border-radius: 8px;
+  border-radius: $border-radius-default;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;

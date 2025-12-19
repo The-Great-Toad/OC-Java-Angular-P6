@@ -46,7 +46,7 @@
             <h4 class="post-title">{{ post.title }}</h4>
             <!-- Author and Date -->
             <div class="post-meta">
-                <div class="post-date">{{ formatDate(post.createdAt) }}</div>
+                <div class="post-date">{{ post.createdAt | frenchDate }}</div>
                 <div class="post-author">{{ post.author }}</div>
             </div>
             <!-- content -->

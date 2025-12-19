@@ -57,5 +57,5 @@
 // Form input highlighted (e.g., profile fields)
 .form-input--highlighted {
   border: 2px solid $color-primary !important;
-  border-radius: 8px !important;
+  border-radius: $border-radius-default !important;
 }

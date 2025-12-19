@@ -20,7 +20,7 @@
         <!-- Post Header -->
         <header class="post-detail__header">
             <span class="post-detail__author">{{ currentPost.author }}</span>
-            <span class="post-detail__date">{{ formatDate(currentPost.createdAt) }}</span>
+            <span class="post-detail__date">{{ currentPost.createdAt | frenchDate }}</span>
             <span class="post-detail__topic">{{ currentPost.topic.name }}</span>
         </header>
 

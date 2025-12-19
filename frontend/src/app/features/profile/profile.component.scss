@@ -4,7 +4,7 @@
 
 .card {
   background: $background-white;
-  border-radius: 8px;
+  border-radius: $border-radius-default;
   padding: 2rem;
   width: 100%;
 
@@ -39,7 +39,7 @@
 // Subscriptions Section
 .subscriptions-section {
   background: $background-white;
-  border-radius: 8px;
+  border-radius: $border-radius-default;
   padding: 2rem;
 
   @media (max-width: $breakpoint-mobile) {
@@ -75,7 +75,7 @@
 .subscription-card {
   padding: 1rem;
   background: $color-bg;
-  border-radius: 8px;
+  border-radius: $border-radius-default;
 }
 
 .subscription-name {

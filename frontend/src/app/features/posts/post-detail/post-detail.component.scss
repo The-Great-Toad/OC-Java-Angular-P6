@@ -46,7 +46,7 @@
 // Comments Section
 .comments-section {
   background: $background-white;
-  border-radius: 8px;
+  border-radius: $border-radius-default;
   padding: 0 3rem;
 
   @media (max-width: $breakpoint-mobile) {
@@ -84,7 +84,7 @@
 
 .comment-content {
   background: $color-bg;
-  border-radius: 8px;
+  border-radius: $border-radius-default;
   padding: 1rem;
   font-size: $font-size-md;
   line-height: $line-height-md;

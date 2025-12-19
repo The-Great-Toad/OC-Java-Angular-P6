@@ -57,7 +57,7 @@ select:invalid {
   background: $color-danger-light;
   color: $color-danger;
   padding: 1rem;
-  border-radius: 8px;
+  border-radius: $border-radius-default;
   margin-bottom: 1.5rem;
   font-size: $font-size-sm;
 }
