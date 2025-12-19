@@ -59,7 +59,6 @@ export class TopicsComponent implements OnInit {
           this.subscribedTopicIds.set(subscribedIds);
         },
         error: (error: Error) => {
-          console.error('Error loading topics:', error);
           this.errorMessage.set('Erreur lors du chargement des thèmes. Veuillez réessayer.');
         },
       });
@@ -82,7 +81,6 @@ export class TopicsComponent implements OnInit {
           this.subscribedTopicIds.set(updatedSet);
         },
         error: (error: HttpErrorResponse) => {
-          console.error('Error subscribing to topic:', error);
           this.errorMessage.set("Erreur lors de l'abonnement au thème. Veuillez réessayer.");
         },
       });

@@ -1,6 +1,6 @@
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { RegisterRequest } from '../../../core/models/auth/register-request.model';
@@ -85,7 +85,16 @@ export class RegisterComponent {
     return this.registerForm.get('password');
   }
 
-  get passwordErrors(): any {
-    return this.password?.errors?.['passwordStrength'];
+  get passwordErrors(): ValidationErrors {
+    const value = this.password?.value || '';
+
+    // Calculer l'état de chaque critère en temps réel
+    return {
+      hasMinLength: value.length >= 8,
+      hasUpperCase: /[A-Z]/.test(value),
+      hasLowerCase: /[a-z]/.test(value),
+      hasNumeric: /[0-9]/.test(value),
+      hasSpecialChar: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value),
+    };
   }
 }

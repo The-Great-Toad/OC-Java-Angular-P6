@@ -42,8 +42,8 @@
                    class="form-input--highlighted" placeholder="Choisissez un mot de passe"
                    [class.invalid]="password?.invalid && password?.touched" />
 
-            <!-- Password Requirements -->
-            @if (password?.touched && password?.invalid && passwordErrors) {
+            <!-- Password Requirements - Affiché dès que l'utilisateur tape -->
+            @if (password?.value) {
             <app-password-requirements
                                        [passwordErrors]="passwordErrors"></app-password-requirements>
             }

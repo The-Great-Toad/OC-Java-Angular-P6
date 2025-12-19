@@ -67,7 +67,6 @@ export class PostDetailComponent implements OnInit {
           this.post.set(post);
         },
         error: (error: Error) => {
-          console.error('Error loading post:', error);
           this.errorMessage.set("Erreur lors du chargement de l'article. Veuillez réessayer.");
         },
       });
@@ -102,7 +101,6 @@ export class PostDetailComponent implements OnInit {
           this.commentForm.reset();
         },
         error: (error: Error) => {
-          console.error('Error creating comment:', error);
           this.errorMessage.set("Erreur lors de l'ajout du commentaire. Veuillez réessayer.");
         },
       });

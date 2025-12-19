@@ -50,7 +50,6 @@ export class FeedComponent implements OnInit {
           }
         },
         error: (error: Error) => {
-          console.error('Error loading posts:', error);
           this.errorMessage.set('Erreur lors du chargement des articles');
         },
       });

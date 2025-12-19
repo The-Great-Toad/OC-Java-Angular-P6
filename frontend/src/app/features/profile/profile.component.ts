@@ -1,6 +1,12 @@
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../core/services/user.service';
 import { SubscriptionService } from '../../core/services/subscription.service';
@@ -70,7 +76,6 @@ export class ProfileComponent implements OnInit {
           });
         },
         error: (error) => {
-          console.error('Error loading profile:', error);
           this.errorMessage.set('Erreur lors du chargement du profil. Veuillez réessayer.');
         },
       });
@@ -101,8 +106,6 @@ export class ProfileComponent implements OnInit {
     };
 
     // If no changes, exit edit mode
-    console.log(updates, Object.keys(updates).length === 0);
-
     if (this.isUpdatesEmpty(updates)) {
       this.isEditMode.set(false);
       this.isSubmitting.set(false);
@@ -123,7 +126,6 @@ export class ProfileComponent implements OnInit {
           this.profileForm.get('password')?.reset();
         },
         error: (error) => {
-          console.error('Error updating profile:', error);
           if (error.status === 409) {
             this.errorMessage.set('Cet email est déjà utilisé.');
           } else {
@@ -159,7 +161,6 @@ export class ProfileComponent implements OnInit {
           }
         },
         error: (error) => {
-          console.error('Error unsubscribing:', error);
           this.errorMessage.set('Erreur lors du désabonnement. Veuillez réessayer.');
         },
       });
@@ -178,7 +179,16 @@ export class ProfileComponent implements OnInit {
     return this.profileForm.get('password');
   }
 
-  get passwordErrors(): any {
-    return this.password?.errors?.['passwordStrength'];
+  get passwordErrors(): ValidationErrors {
+    const value = this.password?.value || '';
+
+    // Calculer l'état de chaque critère en temps réel
+    return {
+      hasMinLength: value.length >= 8,
+      hasUpperCase: /[A-Z]/.test(value),
+      hasLowerCase: /[a-z]/.test(value),
+      hasNumeric: /[0-9]/.test(value),
+      hasSpecialChar: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value),
+    };
   }
 }
