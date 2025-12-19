@@ -85,7 +85,7 @@ export class ProfileComponent implements OnInit {
    * Save profile changes
    */
   onSaveProfile(): void {
-    if (this.profileForm.invalid || this.isSubmitting()) {
+    if (this.isSubmitting()) {
       return;
     }
 
@@ -126,7 +126,8 @@ export class ProfileComponent implements OnInit {
           this.profileForm.get('password')?.reset();
         },
         error: (error) => {
-          if (error.status === 409) {
+          console.log(error);
+          if (error.error.detail === 'Email already exists') {
             this.errorMessage.set('Cet email est déjà utilisé.');
           } else {
             this.errorMessage.set('Erreur lors de la mise à jour du profil. Veuillez réessayer.');

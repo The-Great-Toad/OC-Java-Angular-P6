@@ -50,8 +50,7 @@
         </div>
 
         <div class="flex flex--center">
-            <button type="submit" class="btn btn-primary"
-                    [disabled]="profileForm.invalid || isSubmitting()">
+            <button type="submit" class="btn btn-primary" [disabled]="isSubmitting()">
                 @if (isSubmitting()) {
                 Sauvegarde en cours...
                 } @else {
